@@ -1,0 +1,42 @@
+# === Node ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# === Build output ===
+dist/
+build/
+.out/
+.next/
+*.tsbuildinfo
+
+# === Environment files ===
+.env
+.env.*
+!.env.example
+
+# === Logs ===
+logs/
+*.log
+debug.log
+error.log
+
+# === OS & Editor Files ===
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
+
+# === Testing ===
+coverage/
+.nyc_output/
+jest-test-results.json
+test-results.xml
