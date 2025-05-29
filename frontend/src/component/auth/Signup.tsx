@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupformdata, signupschema } from "../../validations/Signupschema";
 import ReusableTextField from "../reusable/ReusableTextfield";
+import { SIGNUP} from "../graphql/queries";
+import { useMutation } from "@apollo/client";
 
 const Signup: React.FC = () => {
   const { handleSubmit, control, reset } = useForm<signupformdata>({
@@ -18,8 +20,26 @@ const Signup: React.FC = () => {
       DateofBirth: "",
     },
   });
-  const onsubmit = (data: signupformdata) => {
-    console.log(data), reset();
+
+  const [signup, { data, loading, error }] = useMutation(SIGNUP);
+
+  const onsubmit = async(data: signupformdata) => {
+    try{
+      const response=await signup({
+        variables:{
+          email:data.EmailAddress,
+          password:data.Password,
+          first_name:data.FirstName,
+          last_name:data.LastName,
+          DOB:data.DateofBirth
+        }
+      })
+      console.log("SignUp sucess:",response.data.signup)
+       localStorage.setItem("token",response.data.signup.token);
+       reset()
+    }catch(err){
+      console.log("SignUp error:",err)
+    }
   };
 
   return (
@@ -102,6 +122,11 @@ const Signup: React.FC = () => {
                 width={350}
               />
             </div>
+            {error&&(
+              <Typography variant="h6" sx={{marginRight:"8px"}}>
+                {error.message}
+              </Typography>
+            )}
             <Box className="signup-subtext-container">
               <Typography variant="h6" sx={{ marginRight: "8px" }}>
                 Already have an account?
@@ -124,8 +149,9 @@ const Signup: React.FC = () => {
                 type="submit"
                 variant="contained"
                 sx={{ marginBottom: "20px", width: "300px" }}
+                disabled={loading}
               >
-                Sign up
+               {loading?"Signing up...":"Sign up"}
               </Button>
             </div>
           </div>

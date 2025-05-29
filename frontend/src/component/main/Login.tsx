@@ -5,6 +5,10 @@ import ReusableTextField from "../reusable/ReusableTextfield";
 import { useForm } from "react-hook-form";
 import { loginformdata, Loginschema } from "../../validations/Loginschema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LOGIN } from "../graphql/queries";
+import { useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Loginpage: React.FC = () => {
   const {
@@ -20,12 +24,32 @@ const Loginpage: React.FC = () => {
     },
   });
 
-  const onsubmit = (data: loginformdata) => {
-    console.log(data);
-    reset({
-      EmailAddress: "",
-      Password: "",
-    });
+  const navigate=useNavigate()
+
+  const {login}=useAuth()
+
+  const [loginMutation,{loading,error}]=useMutation(LOGIN)
+
+ const onsubmit = async (formData: loginformdata) => {
+    try {
+      const response = await loginMutation({
+        variables: {
+          email: formData.EmailAddress,
+          password: formData.Password,
+        },
+      });
+
+      const token = response.data.login.token;
+
+      console.log("Login success:", response.data.login);
+
+      login(token)
+
+      reset();
+      navigate('/Dashboard')
+    } catch (err) {
+      console.error("Login error:", err);
+    }
   };
 
   return (
@@ -74,6 +98,12 @@ const Loginpage: React.FC = () => {
               helperText={errors.Password?.message}
             />
 
+            {error&&(
+              <Typography color="error" sx={{marginTop:"10px"}}>
+                {error.message}
+              </Typography>
+            )}
+
             <Typography className="logintextlinkforgetpassword">
               <Link
                 className="logintextlinkforgetpassword"
@@ -88,8 +118,8 @@ const Loginpage: React.FC = () => {
             </Typography>
 
             <div className="logindivbtn">
-              <Button variant="contained" type="submit" className="loginbtn">
-                Log in
+              <Button variant="contained" type="submit" className="loginbtn" disabled={loading}>
+                {loading?"Logging in...":"Log in"}
               </Button>
             </div>
             <Typography className="logintextlink">

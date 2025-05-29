@@ -7,5 +7,5 @@ export interface Context {
 }
 
 export const createContext = ({ req, res }: any): Context => ({
-  prisma, // Make sure the prisma client is correctly passed here
+  prisma, 
 });
