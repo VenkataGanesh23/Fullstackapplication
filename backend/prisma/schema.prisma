@@ -19,3 +19,5 @@ model User {
   createdAt      DateTime @default(now())
   isActive Boolean @default(true)
 }
+
+model 

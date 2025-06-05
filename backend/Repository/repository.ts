@@ -69,7 +69,7 @@ class UserRepository {
           email,
           password: encryptedPassword,
           dob,
-          isActive: false,
+          isActive: true,
         },
       });
       console.log(newUser)

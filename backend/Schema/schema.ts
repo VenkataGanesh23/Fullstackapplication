@@ -9,6 +9,16 @@ export const typeDefs = gql`
     dob: String!
   }
 
+  type AuthStatus {
+    status: ResponseStatus!
+  }
+
+  type AuthRequest {
+    status: ResponseStatus!
+    user: User
+  }
+
+
   type ResponseStatus {
     code: Int!
     message: String!
@@ -52,8 +62,8 @@ export const typeDefs = gql`
 
     userConfirm(token: String!): confirmResponse
 
-    requestPasswordReset(email: String!): ResponseStatus!
+    requestPasswordReset(email: String!): AuthStatus!
 
-    resetPassword(token: String!, newPassword: String!): ResponseStatus!
+    resetPassword(token: String!, newPassword: String!): AuthRequest!
   }
 `;
