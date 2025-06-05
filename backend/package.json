@@ -51,6 +51,9 @@
   "jsonwebtoken": "^9.0.2",
   
     
+  "lodash": "^4.17.21",
+  
+    
   "mailer": "^0.6.7",
   
     
@@ -74,6 +77,9 @@
   
     
   "@types/jsonwebtoken": "^9.0.9",
+  
+    
+  "@types/lodash": "^4.17.17",
   
     
   "@types/nodemailer": "^6.4.17",

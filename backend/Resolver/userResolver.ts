@@ -3,7 +3,7 @@ import { Context } from '../src/context';
 import { Prisma,User } from '@prisma/client';
 import { userService } from '../graphql/layers';
 
-export const resolvers = {
+export const userResolver = {
    Query:{
     getAllUsers: async (_parent: any, _args: any, ctx: Context) => {
       return await ctx.prisma.user.findMany();
