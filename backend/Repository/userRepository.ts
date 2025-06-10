@@ -157,6 +157,7 @@ class UserRepository {
 
       const token = this.generateJwtToken(user.id, 3600);
       const url = `${URL}/resetpassword/${token}`;
+      console.log(token);
 
       await sendResetPassword(email, url);
 
@@ -167,8 +168,8 @@ class UserRepository {
       return this.handleError(error, "Failed to send password reset link");
     }
   }
-
-  async resetPassword(token: string, password: string) {
+ 
+  async resetPassword(token: string, newPassword: string) {
     try {
       const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
       const user = await this.prisma.user.findUnique({ where: { id: decoded.userId } });
@@ -177,11 +178,12 @@ class UserRepository {
         return { status: responseStatus(400, "Invalid or expired token") };
       }
 
-      const encryptedPassword = await bcrypt.hash(password, 10);
+      const encryptedPassword = await bcrypt.hash(newPassword, 10);
       const updatedUser = await this.prisma.user.update({
         where: { id: user.id },
         data: { password: encryptedPassword },
       });
+
 
       return {
         status: responseStatus(200, "Password changed successfully"),
@@ -194,6 +196,7 @@ class UserRepository {
       return this.handleError(error, "Failed to reset password");
     }
   }
+
 
   // Helper: Generate JWT token
  private generateJwtToken(userId: number, expiresIn?: number): string {
