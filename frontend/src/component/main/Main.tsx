@@ -7,25 +7,30 @@ import Newpassword from "../auth/Newpassword";
 import Dashboard from "../auth/Dashboard";
 import { ProtectedRoute } from "../routing/Protectedroutes";
 import { useAuth } from "../../context/AuthContext";
+import Shoes from "../reusable/Shoes";
+import ProductDetails from "../reusable/Products/ProductDetails";
 
 const Main: React.FC = () => {
-  const {user}=useAuth()
+  const { user } = useAuth();
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={!user?<Login />:<Navigate to="/dashboard"/>} />
-        <Route path="/Signup" element={<Signup />} />
-        <Route path="/Forgetpassword" element={<Forgetpassword />} />
-        <Route path="/Newpassword" element={<Newpassword />} />
+        <Route path="/" element={!user ? <Login /> : <Navigate to="/dashboard" replace />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/forgetpassword" element={<Forgetpassword />} />
+        <Route path="/newpassword/:token" element={<Newpassword />} />
         <Route
-          path="/Dashboard"
+          path="/dashboard"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <Dashboard />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         />
+        <Route path="/shoes" element={<Shoes />} />
+        {/* <Route path="*" element={<Navigate to="/" replace />} />  */}
+        <Route path="/Productdetails" element={<ProductDetails/>}/>
       </Routes>
     </BrowserRouter>
   );

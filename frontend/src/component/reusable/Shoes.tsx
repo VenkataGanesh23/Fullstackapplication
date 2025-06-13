@@ -1,5 +1,5 @@
-import Footer from "./Footer";
-import Navbar from "./Navbar";
+import Footer from "./Nav&Footer/Footer";
+import Navbar from "./Nav&Footer/Navbar";
 import Drawer from "./Drawer";
 
 const Shoes=()=>{

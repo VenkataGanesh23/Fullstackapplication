@@ -1,3 +1,5 @@
+@import url(https://db.onlinewebfonts.com/c/a8d7b985e4eb8c5d34f2302ffe83e917?family=Nike+Futura+ND);
+
 .forgetpassword-container {
   display: flex;
   height: 100vh;
@@ -65,7 +67,7 @@
   /* margin-left: 70px !important;
   margin-top: 10px !important; */
 }
-.forgetpasswordbtn{
+.forgetpasswordbtn {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -113,15 +115,13 @@ body {
   border-radius: 20px;
   /* box-shadow: 0 10px 40px rgba(255, 255, 255, 0.943) !important; */
   width: 350px;
-  background-color:white;
-  
+  background-color: white;
 }
-.login-right-side{
-  display:flex ;
+.login-right-side {
+  display: flex;
   justify-content: center;
   align-items: center;
   margin-left: 10px;
-  
 }
 
 .logintitle {
@@ -226,8 +226,7 @@ body {
   overflow: hidden;
 } */
 
-
-.signupcontainer{
+.signupcontainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -235,83 +234,83 @@ body {
   background-color: white;
   border-radius: 10px;
 }
-.signuppaper{
-    padding: 28px;
-    border-radius: 8px;
-    /* box-shadow: 0 4px 6px rgba(255, 255, 255, 0.959); */
-    /* width: 100%; */
-    max-width: 600px;
-    background-color: white;
+.signuppaper {
+  padding: 28px;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 6px rgba(255, 255, 255, 0.959); */
+  /* width: 100%; */
+  max-width: 600px;
+  background-color: white;
 }
-.signuptitle{
-    display: flex;
+.signuptitle {
+  display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0px !important;
   font-weight: bold !important;
   font-family: Arial, Helvetica, sans-serif !important;
 }
-.signupsubtitle{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.signupsubtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.signup-subtext-container{
+.signup-subtext-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
 }
-.signuptextfield{
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin-left: 10px !important;
-    margin-bottom: 10px !important;
+.signuptextfield {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-left: 10px !important;
+  margin-bottom: 10px !important;
 }
-.signuptextfield .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input{
+.signuptextfield .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 14.5px 20px;
 }
-.signupsubtitle2{
-display: flex;
-justify-content: center;
-align-items: center;
+.signupsubtitle2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.signupsubtitle3{
- display: flex;
- justify-content: center;
- align-items: center;
+.signupsubtitle3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.signupbtn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif !important;
+.signupbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
-.signupbtnmain{
+.signupbtnmain {
   width: 70% !important;
   margin-left: 20px !important;
   background-color: #18c90b !important;
   font-family: Arial, Helvetica, sans-serif !important;
 }
-.signuplogin{
+.signuplogin {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.newpasswordcontainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+.newpasswordcontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   background-color: white;
   border-radius: 10px;
 }
-.newpasswordtitle{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold !important;
+.newpasswordtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold !important;
 }
 
 .newpassword-container {
@@ -334,42 +333,766 @@ align-items: center;
   height: auto;
   object-fit: cover;
 }
-.newpasswordsubtitle{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif !important;
+.newpasswordsubtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
-.newpasswordpaper{
-    padding: 12px !important;
-    border-radius: 8px;
-    /* box-shadow: 0 4px 6px rgb(255, 255, 255); */
-    max-width: 600px;
-    background-color: #ffffff;
+.newpasswordpaper {
+  padding: 12px !important;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 6px rgb(255, 255, 255); */
+  max-width: 600px;
+  background-color: #ffffff;
 }
-.newpasswordtextfield ,.css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input{
+.newpasswordtextfield,
+.css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input {
   display: flex !important;
   justify-content: center;
   align-items: center;
 }
-.newpasswordtextfield{
+.newpasswordtextfield {
   margin-bottom: 20px !important;
 }
-.newpasswordtextfielddiv{
-  margin-left: 50px ;
+.newpasswordtextfielddiv {
+  margin-left: 50px;
   /* display: flex;
   justify-content: center;
   align-items: center; */
 }
-.newpasswordbtn{
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif !important;
+.newpasswordbtn {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
-.newpasswordbutton{
+.newpasswordbutton {
   background-color: #18c90b !important;
   width: 50% !important;
   border-radius: 5px !important;
   font-family: Arial, Helvetica, sans-serif !important;
+}
+
+img.nike-logo-nav {
+  height: 100% !important;
+  width: 99px !important;
+  cursor: pointer;
+}
+
+.css-1ygil4i-MuiToolbar-root {
+  background-color: #ffffff;
+  height: 60px;
+}
+.css-1umw9bq-MuiSvgIcon-root {
+  color: black;
+}
+.anticon svg {
+  color: black;
+  height: 50px !important;
+  width: 25px !important;
+}
+.nav-text,
+.css-rizt0-MuiTypography-root {
+  color: black;
+  /* display: flex;
+  justify-content: space-between !important; */
+  margin: 20px !important;
+  /* font-weight: 500 !important; */
+  cursor: pointer;
+  /* font-weight: 700 !important; */
+  font-family: "Helvetica Now Text Medium", Helvetica, Arial, sans-serif !important;
+  font: var(--podium-cds-typography-body1-strong) !important;
+}
+.nav-search-icon,
+.css-3ycy3u-MuiInputBase-root .MuiInputBase-input {
+  color: black !important;
+}
+.nav-search-icon{
+  border-radius: 25px !important;
+  overflow: hidden !important;
+}
+
+.nav-fav {
+  /* margin: 10px; */
+}
+.nav-cart {
+  margin: 10px;
+}
+.nav-search-icon {
+  background-color: #f0f0f0 !important;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-search-icon:hover {
+  background-color: #e0e0e0 !important;
+}
+
+.nav-search-icons {
+  color: #555;
+}
+
+.nike-logo-nav {
+  height: 30px !important;
+  margin-right: 0px !important;
+  width: 20px !important;
+}
+
+.nav-text {
+  margin: 0 8px;
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.nav-icon {
+  color: black;
+  margin: 0px 0px 0px 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nav-icon:hover {
+  background-color: #E5E5E5;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.jordan-logo-nav {
+  width: 60px;
+}
+.nav-text-main {
+  cursor: pointer;
+  display: flex !important;
+  margin: 5px;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  unicode-bidi: isolate;
+  font-size: 75%;
+  font-weight: bold !important;
+}
+.nav-text-signout {
+  color: black !important;
+  text-decoration: none !important;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  unicode-bidi: isolate;
+  font-size: 75% !important;
+  font-weight: bold !important;
+  margin: 0px !important;
+  cursor: pointer;
+}
+.css-163zu21 {
+  background-color: white !important;
+}
+.text-carousel {
+  width: 100%;
+  overflow: hidden;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 10px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  position: relative;
+  height: 60px;
+}
+
+.carousel-text-wrapper {
+  display: inline-block;
+  white-space: nowrap;
+  animation: slideInOut 6s ease-in-out infinite;
+}
+
+.carousel-title {
+  font-size: 15px;
+  /* font-weight: bold; */
+  display: block;
+}
+
+.carousel-sub {
+  font-size: 14px;
+  display: block;
+  margin-top: 4px;
+}
+
+.carousel-link {
+  color: #000000;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+@keyframes slideInOut {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  80% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
+  }
+}
+img.main-img {
+  width: 100%;
+}
+.footer-subhead {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  font-family: "Roboto", sans-serif !important;
+  color: #000000 !important;
+  text-decoration: none !important;
+  opacity: 0.6;
+  margin: 0px 70px 5px 30px !important;
+  font-weight: bold !important;
+}
+.footer-head {
+  font-weight: bold !important;
+  font-size: 14px !important;
+  margin: 30px !important;
+}
+.footer-text {
+  margin-top: 10px !important;
+  color: #000000 !important;
+  text-decoration: none !important;
+}
+.carousel-text-link {
+  /* text-decoration: none !important; */
+  color: #000000 !important;
+  margin-top: 15px !important;
+}
+.css-8giy41 {
+  border-radius: 0% !important;
+}
+.nav-text-symbol {
+  font-weight: lighter !important;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.vertical-line {
+  border-right: 1px solid;
+  height: 12px;
+  margin: 12px;
+}
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  margin-top: 60px;
+  flex-wrap: wrap;
+  margin-bottom: 90px;
+}
+
+.footer-left {
+  font-size: 14px !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+  font-weight: bold !important;
+}
+
+.footer-right {
+  display: flex !important;
+  gap: 40px !important;
+  flex-wrap: wrap !important;
+  margin-left: 20px !important;
+  font-weight: bold !important;
+}
+
+.footer-link {
+  font-size: 14px !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+.css-17fpwt7-MuiGrid-root {
+  margin: 20px;
+}
+/* Dashboard.css */
+
+.off-season-promo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers items horizontally */
+  justify-content: center; /* Centers items vertically if container has a defined height */
+  text-align: center; /* Ensures text within the container is centered */
+  padding: 40px 20px; /* Adjust padding as needed */
+  background-color: #ffffff; /* White background as seen in the image */
+}
+
+.off-season-promo-heading {
+  font-family: "Anton", sans-serif; /* Apply the Anton font */
+  font-size: 7vw; /* Responsive font size based on viewport width */
+  font-weight: 900; /* Extra bold for "TURN OFF SEASON ON" */
+  color: #000000; /* Black text */
+  margin-bottom: 20px; /* Space below the heading */
+  line-height: 1; /* Adjust line height if needed for tighter text */
+  text-transform: uppercase; /* Ensures text is uppercase */
+  letter-spacing: -0.05em; /* Slightly tighter letter spacing to match the image */
+}
+
+.off-season-promo-subtext {
+  font-family: Arial, sans-serif; /* Using a common sans-serif for body text */
+  font-size: 1.5vw; /* Responsive font size */
+  color: #333333; /* Slightly lighter black for the subtext */
+  margin-bottom: 40px; /* Space below the subtext */
+  max-width: 600px; /* Limit width for better readability */
+  line-height: 1.5; /* Good line height for readability */
+}
+
+.off-season-promo-button {
+  background-color: #000000; /* Black button background */
+  color: #ffffff; /* White text on the button */
+  padding: 15px 40px; /* Padding for the button */
+  border: none; /* No border */
+  border-radius: 30px; /* Rounded corners */
+  font-size: 1.2em; /* Font size for the button text */
+  font-weight: bold; /* Bold text on the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  text-transform: uppercase; /* Ensure button text is uppercase */
+  letter-spacing: 0.05em; /* Slight letter spacing */
+  font-family: Arial, sans-serif; /* Ensure button text also uses a clear font */
+}
+
+.off-season-promo-button:hover {
+  background-color: #333333; /* Darker grey on hover */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .off-season-promo-heading {
+    font-size: 10vw; /* Larger font size on smaller screens */
+  }
+
+  .off-season-promo-subtext {
+    font-size: 2.5vw; /* Larger font size on smaller screens */
+  }
+
+  .off-season-promo-button {
+    padding: 12px 30px;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .off-season-promo-heading {
+    font-size: 12vw;
+    margin-bottom: 15px;
+  }
+
+  .off-season-promo-subtext {
+    font-size: 3.5vw;
+    margin-bottom: 30px;
+  }
+
+  .off-season-promo-button {
+    padding: 10px 25px;
+    font-size: 0.9em;
+  }
+}
+
+/* dashboard.css */
+.overlay-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 60%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 24px;
+  border-radius: 16px;
+  z-index: 10;
+}
+
+.overlay-title {
+  font-size: 28px;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.overlay-subtitle {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.overlay-button {
+  background-color: #fff;
+  color: #111;
+  font-weight: 600;
+  padding: 8px 24px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.overlay-button:hover {
+  background-color: #ddd;
+}
+
+.nav-name {
+  display: flex;
+  margin-right: 200px;
+}
+:where(.css-dev-only-do-not-override-mc1tut).ant-menu-light.ant-menu-inline
+  .ant-menu-item,
+:where(.css-dev-only-do-not-override-mc1tut).ant-menu-light
+  > .ant-menu.ant-menu-inline
+  .ant-menu-item {
+  height: auto;
+  padding-left: "15px" !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.drawer-dropdown {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+  /* font-size: 14px; */
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  /* padding: "6px 10px" */
+}
+.drawer-dropdown :hover {
+  color: grey;
+}
+.drawer-colour {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* gap: 13px; */
+  /* padding: 1px; */
+  height: 100px;
+  overflow-y: auto;
+  padding-top: 20px;
+}
+.drawer-texts {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.drawer-colour-styles {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 50%;
+  position: relative;
+  border: 2px solid #ccc;
+  background-color: var(--bg-color);
+  transition: border 0.3s ease;
+}
+
+.drawer-colour-styles.selected {
+  border: 3px solid black;
+}
+.checkmark-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.drawer-scrollbar {
+  height: 100vh;
+  overflow-y: auto;
+}
+.drawer-colour-styles {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 50%;
+  position: relative;
+  border: 2px solid #ccc;
+  background-color: var(--bg-color);
+  transition: border 0.3s ease;
+}
+
+.drawer-colour-styles.selected {
+  border: 3px solid black;
+}
+
+.drawer-colour-font {
+  font-size: 12px;
+  margin-top: 1px;
+}
+.drawer-right {
+  /* padding: 24px; */
+  /* min-height: 700px; */
+}
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  position: relative;
+  background-color: white;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+.custom-checkbox.checked {
+  background-color: #000;
+}
+.custom-checkbox.checked::after {
+  content: "";
+  position: absolute;
+  left:5px;
+  top: 1px;
+  width: 5px;
+  /* font-weight: 700; */
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  animation: tickAppear 0.2s ease forwards;
+}
+@keyframes tickAppear {
+  from {
+    opacity: 0;
+    transform: rotate(45deg) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+  }
+}
+.drawer-dropdown {
+  cursor: pointer;
+    white-space: normal !important;
+    margin-top: 5px;
+}
+:where(.css-dev-only-do-not-override-mc1tut).ant-menu-light .ant-menu-item-selected, :where(.css-dev-only-do-not-override-mc1tut).ant-menu-light>.ant-menu .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-mc1tut).ant-menu-light .ant-menu-submenu-selected>.ant-menu-submenu-title, :where(.css-dev-only-do-not-override-mc1tut).ant-menu-light>.ant-menu .ant-menu-submenu-selected>.ant-menu-submenu-title{
+  color: #000000 !important;
+}
+.checkmark-badge{
+  font-weight: 900;
+}
+.ant-menu-item {
+  padding-left: 0px !important;
+  background-color: white !important;
+}
+.ant-menu-submenu-title {
+  padding-left: 0px !important;
+}
+.ant-menu-item {
+  /* padding-left: 60px !important; */
+}
+:where(.css-dev-only-do-not-override-mc1tut).ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline, :where(.css-dev-only-do-not-override-mc1tut).ant-menu-light>.ant-menu.ant-menu-inline .ant-menu-sub.ant-menu-inline{
+  background-color: white;
+}
+
+.product-card {
+  width: 407px;
+  /* border: 1px solid #e0e0e0; */
+  /* border-radius: 10px; */
+  overflow: hidden;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: white;
+  transition: box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+}
+
+.product-card__body {
+  padding: 0;
+}
+
+.product-card__link-overlay {
+  display: none;
+}
+
+.product-card__img-link-overlay img {
+  width: 110%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.wall-image-loader {
+  width: 100%;
+  background: #f5f5f5;
+}
+
+.product-card__info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+}
+
+.product-card__messaging {
+  font-size: 13px;
+  color: #D33918;
+  font-weight: 600;
+}
+
+.product-card__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.product-card__title {
+  font-size: 16px;
+  /* font-weight: 600; */
+  color: #111;
+font-weight: 550;
+/* font-size: 1rem; */
+line-height: 1.5;
+font-family: 'Helvetica Now Text Medium', Helvetica, Arial, sans-serif;
+}
+
+.product-card__subtitle {
+  font-size: 16px;
+  color: #707072;
+}
+
+.product-card__count-wrapper {
+  margin: 4px 0;
+}
+
+.product-card__colorway-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.product-card__product-count {
+  font-size: 16px;
+  color: #707072;
+}
+
+.product-card__price-wrapper {
+  font-weight: 550;
+  margin-top: auto; /* pushes it to the bottom if card height grows */
+}
+
+.product-card__price {
+  font-size: 16px;
+  color: #000;
+}
+.horizontal-carousel {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100%;
+  padding: 10px 0;
+  box-sizing: border-box;
+  /* scrollbar-width: thin; */
+}
+
+.carousel-track {
+  display: flex;
+  gap: 12px;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: 450px;
+  height: 450px;
+  /* border-radius: 8px; */
+  overflow: hidden;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel-one{
+  display: flex;
+}
+.css-cxyzjo-MuiSvgIcon-root{
+/* height: 30px !important; */
+/* font-weight: 100 !important; */
+font-size:40px !important;
+background-color: #E5E5E5;
+border-radius: 50%;
+padding: 8px !important;
+}
+.css-cxyzjo-MuiSvgIcon-root{
+  margin-left: 00px;
+}
+.dashboard-featured{
+  display: flex;
+  font-weight: bold !important;
+  margin: 83px 0px 0px 53px !important;
+}
+.css-1tezr9m::-webkit-scrollbar {
+  height: 8px; /* height for horizontal scrollbar */
+  width: 8px;  /* width for vertical scrollbar */
+}
+
+/* Scrollbar Thumb */
+.css-1tezr9m::-webkit-scrollbar-thumb {
+  background-color: #707072;
+  border-radius: 4px;
+}
+
+/* Scrollbar Track */
+.css-1tezr9m::-webkit-scrollbar-track {
+  background-color: transparent; /* or any background */
+}
+.navigate-icon-left::after{
+  color: #000000;
+}
+.css-rrvoqz-MuiToggleButtonGroup-root .MuiToggleButtonGroup-grouped{
+  padding: 25px;
+  width: 180px;
+  color: black;
+}
+.product-fav-icon{
+  margin-left: 5px;
+}
+.drawer-right {
+  overflow-y: auto;
+}
+
+.drawer-right::-webkit-scrollbar {
+  display: none; 
+}
+.css-19g2adq-MuiButtonBase-root-MuiToggleButton-root.Mui-selected:hover{
+  background-color: white !important;
+}
+.css-1etnoqg-MuiRating-root{
+  margin-left: 100px !important;
 }
