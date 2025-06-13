@@ -28,7 +28,7 @@ export const userResolver = {
     },
 
      resetPassword: async (_parent: any, args: any) => {
-      return await userService.resetPassword(args.token, args.password);
+      return await userService.resetPassword(args.token, args.newPassword);
     },
   },
 };

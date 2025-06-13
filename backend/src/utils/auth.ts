@@ -16,7 +16,7 @@ export const comparePasswords = async (password: string, hash: string) => {
 };
 
 export const generateToken = (userId: number) => {
-  // console.log(JWT_SECRET)
+  console.log(JWT_SECRET)
   return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '7d' });
 };
 
