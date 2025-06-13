@@ -1,41 +1,62 @@
-import CartRepository from "../Repository/cartRepository";
-const cartRepository = new CartRepository();
+import { Context } from '../src/context';
+import { cartService } from '../graphql/layers';
 
 export const cartResolver = {
   Query: {
-    getCart: async (_: any, { userId }: { userId: number }) => {
-      const cart = await cartRepository.getCart(userId);
-      return {
-        code: 200,
-        message: "Cart fetched successfully",
-        cart,
-      };
+    getActiveCart: async (_parent: any, args: { userId: number }, ctx: Context) => {
+      return await cartService.getActiveCart(args.userId);
     },
   },
+
   Mutation: {
-    addToCart: async (_: any, args: { userId: number; productId: number; quantity: number }) => {
-      const cart = await cartRepository.addToCart(args.userId, args.productId, args.quantity);
-      return {
-        code: 200,
-        message: "Product added to cart",
-        cart,
-      };
+    addToCart: async (
+      _parent: any,
+      args: {
+        cartId: number;
+        productId: number;
+        quantity: number;
+        size?: string;
+        color?: string;
+      },
+      ctx: Context
+    ) => {
+      return await cartService.addToCart(
+        args.cartId,
+        args.productId,
+        args.quantity,
+        args.size,
+        args.color
+      );
     },
-    removeFromCart: async (_: any, args: { userId: number; productId: number }) => {
-      const cart = await cartRepository.removeFromCart(args.userId, args.productId);
-      return {
-        code: 200,
-        message: "Product removed from cart",
-        cart,
-      };
+
+    updateCartItem: async (
+      _parent: any,
+      args: {
+        cartItemId: number;
+        quantity: number;
+        size?: string;
+        color?: string;
+      },
+      ctx: Context
+    ) => {
+      return await cartService.updateCartItem(
+        args.cartItemId,
+        args.quantity,
+        args.size,
+        args.color
+      );
     },
-    clearCart: async (_: any, { userId }: { userId: number }) => {
-      const cart = await cartRepository.clearCart(userId);
-      return {
-        code: 200,
-        message: "Cart cleared",
-        cart,
-      };
+
+    removeCartItem: async (
+      _parent: any,
+      args: { cartItemId: number },
+      ctx: Context
+    ) => {
+      return await cartService.removeCartItem(args.cartItemId);
+    },
+
+    clearCart: async (_parent: any, args: { userId: number }, ctx: Context) => {
+      return await cartService.clearCart(args.userId);
     },
   },
 };

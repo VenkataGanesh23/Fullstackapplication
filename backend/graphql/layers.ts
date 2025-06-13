@@ -1,12 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import UserRepository from "../Repository/userRepository";
 import UserService from "../Services/userServices";
-import { userTypeDefs } from "../Schema/userSchema";
-import { userResolver } from "../Resolver/userResolver";
-import { productTypeDefs } from "../Schema/productSchema";
-import { productResolver } from "../Resolver/productResolver";
-import { categoryTypeDefs } from "../Schema/categorySchema";
-import { categoryResolver } from "../Resolver/categoryResolver";
+import CartRepository from "../Repository/cartRepository";
+import CartService from "../Services/cartServices";
 
 const prisma = new PrismaClient();
 
@@ -15,16 +11,16 @@ const prisma = new PrismaClient();
 const userRepository = new UserRepository(prisma);
 const userService = new UserService(userRepository);
 
+//cart
 
-
-const typeDef = [userTypeDefs, productTypeDefs, categoryTypeDefs];
-const resolver = [userResolver, productResolver, categoryResolver];
+const cartRepository = new CartRepository(prisma)
+const cartService = new CartService(cartRepository)
 
 
 export {
   prisma,
   userRepository,
   userService,
-  typeDef,
-  resolver
+  cartService,
+  cartRepository
 }

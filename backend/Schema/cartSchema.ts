@@ -3,31 +3,54 @@ import { gql } from "apollo-server";
 export const cartTypeDefs = gql`
   type CartItem {
     id: Int!
-    product: Product!
+    productId: Int!
     quantity: Int!
+    size: String
+    color: String
+    product: Product
+    addedAt: String!
   }
 
   type Cart {
     id: Int!
     userId: Int!
-    items: [CartItem!]!
+    isActive: Boolean!
     createdAt: String!
     updatedAt: String!
+    cartItems: [CartItem!]!
+  }
+
+  type CartResponseStatus {
+    code: Int!
+    message: String!
   }
 
   type CartResponse {
-    code: Int!
-    message: String!
+    status: CartResponseStatus!
     cart: Cart
   }
 
-  type Mutation {
-    addToCart(productId: Int!, quantity: Int!): CartResponse!
-    removeFromCart(productId: Int!): CartResponse!
-    clearCart: CartResponse!
+  type CartItemsResponse {
+    status: CartResponseStatus!
+    cartItems: [CartItem!]!
   }
 
   type Query {
-    getCart: CartResponse!
+    getActiveCart(userId: Int!): CartResponse!
+  }
+
+  input CartItemInput {
+    productId: Int!
+    quantity: Int!
+    size: String
+    color: String
+  }
+
+  type Mutation {
+    addToCart(userId: Int!, item: CartItemInput!): CartResponse!
+    updateCartItem(cartItemId: Int!, quantity: Int!, size: String, color: String): CartResponse!
+    removeCartItem(cartItemId: Int!): CartResponse!
+    clearCart(userId: Int!): CartResponse!
   }
 `;
+
