@@ -156,7 +156,7 @@ class UserRepository {
       }
 
       const token = this.generateJwtToken(user.id, 3600);
-      const url = `${URL}/resetpassword/${token}`;
+      const url = `${URL}/newpassword/${token}`;
 
       await sendResetPassword(email, url);
 
@@ -172,7 +172,7 @@ class UserRepository {
     try {
       const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
       const user = await this.prisma.user.findUnique({ where: { id: decoded.userId } });
-
+console.log(this.resetPassword)
       if (!user) {
         return { status: responseStatus(400, "Invalid or expired token") };
       }
