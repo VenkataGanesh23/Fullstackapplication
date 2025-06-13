@@ -173,7 +173,7 @@ class UserRepository {
     try {
       const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
       const user = await this.prisma.user.findUnique({ where: { id: decoded.userId } });
-
+console.log(this.resetPassword)
       if (!user) {
         return { status: responseStatus(400, "Invalid or expired token") };
       }
