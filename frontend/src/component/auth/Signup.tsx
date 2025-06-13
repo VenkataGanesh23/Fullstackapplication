@@ -23,24 +23,32 @@ const Signup: React.FC = () => {
 
   const [signup, { data, loading, error }] = useMutation(SIGNUP);
 
-  const onsubmit = async(data: signupformdata) => {
-    try{
-      const response=await signup({
-        variables:{
-          email:data.EmailAddress,
-          password:data.Password,
-          first_name:data.FirstName,
-          last_name:data.LastName,
-          DOB:data.DateofBirth
-        }
-      })
-      console.log("SignUp sucess:",response.data.signup)
-       localStorage.setItem("token",response.data.signup.token);
-       reset()
-    }catch(err){
-      console.log("SignUp error:",err)
-    }
-  };
+const onsubmit = async (data: signupformdata) => {
+  console.log("DateofBirth value:", data.DateofBirth);
+  if (!data.DateofBirth) {
+    console.error("DateofBirth is empty! Cannot proceed.");
+    return;
+  }
+  console.log(data, 'data of response')
+  try {
+    const response = await signup({
+      variables: {
+        email: data.EmailAddress,
+        password: data.Password,
+        firstName: data.FirstName,
+        lastName: data.LastName,
+        dob: data.DateofBirth,
+      },
+    });
+    console.log("SignUp success:", response.data.signup);
+    localStorage.setItem("token", response.data.signup.token);
+    reset();
+  } catch (err) {
+    console.log("SignUp error:", err);
+  }
+};
+
+
 
   return (
     <Box className="signup-container">
@@ -122,15 +130,17 @@ const Signup: React.FC = () => {
                 width={350}
               />
             </div>
-            {error&&(
-              <Typography variant="h6" sx={{marginRight:"8px"}}>
-                {error.message}
-              </Typography>
-            )}
-            <Box className="signup-subtext-container">
-              <Typography variant="h6" sx={{ marginRight: "8px" }}>
-                Already have an account?
-              </Typography>
+            <Box>
+  {error && (
+    <Typography variant="h6" sx={{ marginRight: "8px" }}>
+      {error.message}
+    </Typography>
+  )}
+  <Box className="signup-subtext-container">
+    <Typography variant="h6" sx={{ marginRight: "8px" }}>
+      Already have an account?
+    </Typography>
+  </Box>
               <Link
                 to="/"
                 style={{

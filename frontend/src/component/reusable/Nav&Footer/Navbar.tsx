@@ -4,13 +4,14 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import logo from "../../assets/nikelogo.webp";
+import logo from "../../../assets/nikelogo.webp";
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import SearchIcon from "@mui/icons-material/Search";
-import jordanlogo from "../../assets/jordanlogo.webp";
-import { useAuth } from "../../context/AuthContext";
+import jordanlogo from "../../../assets/jordanlogo.webp";
+import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,9 +54,34 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
+const texts = [
+  {
+    title: "New Styles On Sale: Up To 40% Off",
+    subtitle: "",
+    link: "/Shoes",
+  },
+  {
+    title: "Move, Shop, Customise & Celebrate With Us",
+    subtitle:
+      "No matter what you feel like doing today, it’s better as a Member.",
+    link: "",
+  },
+];
+
 export default function Navbar() {
+  const [index, setIndex] = useState(0);
+      const current = texts[index];
   const { logout } = useAuth(); // ✅ Now correctly inside component
   const navigate = useNavigate();
+
+    useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % texts.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
 
   const handleLogout = () => {
     logout();
@@ -128,6 +154,32 @@ export default function Navbar() {
           <WorkOutlineIcon className="nav-icon" />
         </Toolbar>
       </AppBar>
+      <Box sx={{ backgroundColor: "#f5f5f5", py: 2, textAlign: "center", px: 2 }}>
+        <Typography variant="h5" sx={{ fontSize: 16 }}>
+          {current.title}
+        </Typography>
+        {current.subtitle && (
+          <Typography variant="subtitle1" sx={{ color: "black", fontSize: 14 }}>
+            {current.subtitle}
+          </Typography>
+        )}
+        {current.link && (
+          <Typography
+            onClick={() => navigate(current.link)}
+            sx={{
+              cursor: "pointer",
+              display: "inline-block",
+              fontSize: 12,
+              color: "black",
+              textDecoration: "underline",
+              mt: 1,
+              fontWeight: "bold",
+            }}
+          >
+            Shop All Our New Markdowns
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
 }

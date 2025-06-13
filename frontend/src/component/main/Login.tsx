@@ -39,7 +39,7 @@ const Loginpage: React.FC = () => {
         },
       });
 
-      const token = response.data.login.token;
+      const token = response?.data?.login?.token;
 
       console.log("Login success:", response.data.login);
 

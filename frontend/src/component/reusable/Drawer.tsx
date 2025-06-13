@@ -3,7 +3,7 @@ import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { Divider } from "@mui/material";
-import ProductCard from "./Productcard";
+import ProductCard from "./Products/ProductCard";
 
 const { Header, Sider } = Layout;
 type MenuItem = Required<MenuProps>["items"][number];
@@ -63,7 +63,7 @@ const Drawer: React.FC = () => {
           style={{ display: "flex", alignItems: "center", gap: "8px" }}
         >
           <div
-            className={`custom-checkbox ${isSelected ? "checked" : ""}`}
+            className={`custom-checkbox ${isSelected ? "checked" : "/ProductDetails"}`}
           ></div>
           <span>{label}</span>
         </div>
@@ -88,7 +88,7 @@ const Drawer: React.FC = () => {
             title={color}
           >
             <div
-              className={`drawer-colour-styles ${isSelected ? "selected" : ""}`}
+              className={`drawer-colour-styles ${isSelected ? "selected" : "/ProductDetails"}`}
               style={{ background: bg }}
             >
               {isSelected && <span className="checkmark-badge">✔</span>}
@@ -129,7 +129,7 @@ const Drawer: React.FC = () => {
     ]),
     renderDivider("divider3"),
     getItem(
-      `Sale & Offers${selectedItems.includes("s1") ? " (1)" : ""}`,
+      `Sale & Offers${selectedItems.includes("s1") ? " (1)" : "/ProductDetails"}`,
       "sub3",
       undefined,
       [renderCheckableItem("Sale", "s1")]
@@ -212,15 +212,14 @@ const Drawer: React.FC = () => {
       </Sider>
       <Layout style={{ overflow: "hidden" }}>
   <Header style={{ padding: 0, background: colorBgContainer }} />
-  <div
-    className="drawer-right"
-    style={{
-      background: colorBgContainer,
-      height: "calc(100vh - 64px)", 
-      overflowY: "auto",
-      padding: "0px",
-    }}
-  >
+<div
+  className="drawer-right"
+  style={{
+    background: colorBgContainer,
+    height: "calc(100vh - 64px)",
+    padding: "0px",
+  }}
+>
     <div style={{ display: "flex", flexWrap: "wrap", gap: "0px" }}>
       <ProductCard
         title="Nike Air Max 95"
@@ -228,7 +227,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       />
       <ProductCard
@@ -237,7 +236,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       />
       <ProductCard
@@ -246,7 +245,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       />
       <ProductCard
@@ -255,7 +254,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       />
       <ProductCard
@@ -264,7 +263,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       />
       <ProductCard
@@ -273,7 +272,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       />
       <ProductCard
@@ -282,7 +281,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       /><ProductCard
         title="Nike Air Max 95"
@@ -290,7 +289,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       />
       <ProductCard
@@ -299,7 +298,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       />
       <ProductCard
@@ -308,7 +307,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       />
       <ProductCard
@@ -317,7 +316,7 @@ const Drawer: React.FC = () => {
         message="Available in SNKRS"
         price="₹ 10,295.00"
         image="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e36233ae-108c-4321-a326-4919d85a26b8/AIR+MAX+95+BB+S+%28GS%29.png"
-        link="https://www.nike.com/in/launch/r/HF7054-006"
+        link="/ProductDetails"
         colorCount="1 Colour"
       />
     </div>
