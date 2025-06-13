@@ -54,19 +54,28 @@ model Category {
 }
 
 model Cart {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  user      User      @relation(fields: [userId], references: [id])
-  items     CartItem[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id           Int        @id @default(autoincrement())
+  user         User       @relation(fields: [userId], references: [id])
+  userId       Int
+  isActive     Boolean    @default(true)         // Indicates current active shopping cart
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  cartItems    CartItem[]
+
+  @@index([userId])
 }
 
 model CartItem {
-  id        Int      @id @default(autoincrement())
-  cartId    Int
-  cart      Cart     @relation(fields: [cartId], references: [id])
-  productId Int
-  product   Product  @relation(fields: [productId], references: [id])
-  quantity  Int      @default(1)
+  id          Int       @id @default(autoincrement())
+  cart        Cart      @relation(fields: [cartId], references: [id])
+  cartId      Int
+  product     Product   @relation(fields: [productId], references: [id])
+  productId   Int
+  quantity    Int       @default(1)
+  size        String?   // Optional: product size, e.g., shoe size
+  color       String?   // Optional: product color variant
+  addedAt     DateTime  @default(now())
+
+  @@unique([cartId, productId, size, color])  // Prevent duplicate cart items with same product + variant
+  @@index([cartId])
 }
