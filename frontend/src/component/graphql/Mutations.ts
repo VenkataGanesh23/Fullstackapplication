@@ -54,7 +54,7 @@ export const REQUEST_PASSWORD_RESET = gql`
 `;
 
 export const NEW_PASSWORD = gql`
- mutation ResetPassword($token: String!, $newPassword: String!) {
+mutation ResetPassword($token: String!, $newPassword: String!) {
   resetPassword(token: $token, newPassword: $newPassword) {
     status {
       code
@@ -70,3 +70,40 @@ export const NEW_PASSWORD = gql`
   }
 }
 `;
+
+export const DELETE_PRODUCT=gql`
+mutation Mutation($deleteProductId: Int!) {
+  deleteProduct(id: $deleteProductId) {
+    code
+    message
+  }
+}
+`
+export const CREATE_CATEGORY=gql`
+mutation Mutation($name: String!, $description: String) {
+  createCategory(name: $name, description: $description) {
+    code
+    message
+    category {
+      id
+      name
+      description
+      createdAt
+    }
+  }
+}
+`
+export const DELETE_CATEGORY=gql`
+mutation Mutation($name: String!, $description: String) {
+  createCategory(name: $name, description: $description) {
+    code
+    message
+    category {
+      id
+      name
+      description
+      createdAt
+    }
+  }
+}
+`

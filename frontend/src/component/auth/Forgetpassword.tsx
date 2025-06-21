@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Forgetschema, Forgetdata } from "../../validations/Forgetvalidation";
 import { useMutation } from "@apollo/client";
-import { REQUEST_PASSWORD_RESET } from "../graphql/queries"; // Use appropriate import
+import { REQUEST_PASSWORD_RESET } from "../graphql/Mutations"; // Use appropriate import
 
 const Forgetpassword: React.FC = () => {
   const { handleSubmit, control, reset, formState: { errors } } = useForm<Forgetdata>({

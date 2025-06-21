@@ -14,11 +14,17 @@ import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ProductDescription from "./ProductDescription";
+import "../../css/Productdetails.css";
+import DesignServicesRoundedIcon from "@mui/icons-material/DesignServicesRounded";
+
 
 const mockImages = [img1, img1, img1, img1, img2];
 
 const availableSizes = [
+  "UK 5.5",
+  "UK 6 (EU 39)",
   "UK 6 (EU 40)",
+  "UK 6.5",
   "UK 7",
   "UK 7.5",
   "UK 8",
@@ -62,191 +68,96 @@ const ProductDetails = () => {
       setShowError(true);
     } else {
       setShowError(false);
-      // Proceed to add to cart
+      // Add to cart logic
     }
   };
+
   const productDescriptionData = {
     about: "Created for the hardwood but taken to the streets...",
     color: "Colour Shown: White/White/Black",
     style: "Style: DD1391-100",
     origin: "Country/Region of Origin: China, Indonesia, Vietnam",
     productDetails: "View Product Details",
-    deliveryReturns: `All purchases are subject to delivery fees.
-
-Standard delivery 4–9 business days
-Orders are processed and delivered Monday–Friday (excluding public holidays)
-
-Nike Members enjoy free returns.`,
+    deliveryReturns: `All purchases are subject to delivery fees.`,
     reviews: "No reviews yet",
     declaration:
       "Declaration of Importer: Direct import by the individual customer",
     marketedBy:
       "Marketed by: Nike Global Trading B.V. Singapore Branch, 30 Pasir Panjang Road...",
-    note: "The ® may appear once or twice on the tongue and/or sockliner as a result of a change implemented by Nike. The product you purchase may appear differently in this respect than the one depicted on Nike.com or NikeApp.",
+    note: "The ® may appear once or twice on the tongue and/or sockliner...",
   };
 
   return (
     <>
       <Navbar />
-      <Box sx={{ display: "flex", p: 4, height: "100vh", overflow: "auto" }}>
-        {/* Left - Thumbnails + Main Image */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            width: "60%",
-          }}
-        >
-          <Box sx={{ display: "flex", gap: 1 }}>
-            {/* Thumbnails */}
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-              {mockImages.map((img, index) => (
-                <Box
-                  key={index}
-                  component="img"
-                  src={img}
-                  onMouseEnter={() => setImageIndex(index)}
-                  sx={{
-                    width: 60,
-                    height: 60,
-                    objectFit: "cover",
-                    borderRadius: 1,
-                    cursor: "pointer",
-                    opacity: imageIndex === index ? 0.6 : 1,
-                    transition: "opacity 0.3s, transform 0.3s",
-                    "&:hover": {
-                      opacity: 0.7,
-                      transform: "scale(1.05)",
-                    },
-                  }}
-                />
-              ))}
-            </Box>
-
-            {/* Main Image */}
-            <Box sx={{ position: "relative", width: "500px", height: "auto" }}>
-              <Box
-                component="img"
-                src={mockImages[imageIndex]}
-                sx={{
-                  width: "100%",
-                  height: "auto",
-                  borderRadius: 2,
-                  objectFit: "contain",
-                }}
+      <Box
+        sx={{
+          display: "flex",
+          height: "100vh",
+          overflow: "hidden",
+        }}
+      >
+        {/* Left Section */}
+        <Box className="left-section">
+          <Box className="thumbnails">
+            {mockImages.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`thumb-${index}`}
+                className={`thumbnail ${imageIndex === index ? "active" : ""}`}
+                onMouseEnter={() => setImageIndex(index)}
               />
-
-              {/* Bottom-Centered Arrows */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  bottom: 10,
-                  left: "90%",
-                  transform: "translateX(-50%)",
-                  display: "flex",
-                  gap: 2,
-                  borderRadius: 5,
-                }}
-              >
-                <ArrowBackIosNewRoundedIcon
-                  onClick={handlePrevImage}
-                  sx={{
-                    fontSize: 18,
-                    cursor: "pointer",
-                    backgroundColor: "#fff",
-                    border: "1px solid #ccc",
-                    borderRadius: "50%",
-                    width: 32,
-                    height: 32,
-                    padding: "6px",
-                    boxSizing: "border-box",
-                    "&:hover": {
-                      backgroundColor: "#f5f5f5",
-                      borderColor: "black",
-                    },
-                  }}
-                />
-                <ArrowForwardIosRoundedIcon
-                  onClick={handleNextImage}
-                  sx={{
-                    fontSize: 18,
-                    cursor: "pointer",
-                    backgroundColor: "#fff",
-                    border: "1px solid #ccc",
-                    borderRadius: "50%",
-                    width: 32,
-                    height: 32,
-                    padding: "6px",
-                    boxSizing: "border-box",
-                    "&:hover": {
-                      backgroundColor: "#f5f5f5",
-                      borderColor: "black",
-                    },
-                  }}
-                />
-              </Box>
+            ))}
+          </Box>
+          <Box className="main-image-wrapper">
+            <img
+              src={mockImages[imageIndex]}
+              alt="main"
+              className="main-image"
+            />
+            <Box className="image-nav-buttons">
+              <ArrowBackIosNewRoundedIcon
+                onClick={handlePrevImage}
+                className="arrow-btn"
+              />
+              <ArrowForwardIosRoundedIcon
+                onClick={handleNextImage}
+                className="arrow-btn"
+              />
             </Box>
           </Box>
         </Box>
 
-        {/* Right - Details */}
+        {/* Right Section (scrollable only) */}
         <Box
+          className="right-section"
           sx={{
-            width: "40%",
-            pl: 4,
             overflowY: "auto",
-            maxHeight: "100vh",
-            scrollbarWidth: "none",
+            height: "100vh",
+            pr: 3,
+            scrollbarWidth: "none", // Firefox
             "&::-webkit-scrollbar": {
-              display: "none",
+              display: "none", // Chrome/Safari
             },
           }}
         >
-          <Typography variant="h6">Nike Dunk Low Retro</Typography>
-          <Typography color="text.secondary" gutterBottom>
-            Men's Shoe
-          </Typography>
+          <Typography variant="h6" sx={{mt:8}}>Nike Dunk Low Retro</Typography>
+          <Typography color="text.secondary">Men's Shoe</Typography>
           <Typography variant="h5" sx={{ mt: 1 }}>
             MRP : ₹ 8,295.00
           </Typography>
-          <Typography fontSize={12} color="gray" sx={{ mb: 2 }}>
-            Inclusive of all taxes
-            <br />
-            (Also includes all applicable duties)
+          <Typography className="tax-info">
+            Inclusive of all taxes <br /> (Also includes all applicable duties)
           </Typography>
 
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}>
-            <Box
-              component="img"
-              src={img1}
-              alt="icon"
-              sx={{
-                width: 80,
-                height: 80,
-                border: "1px solid black",
-                borderRadius: 2,
-              }}
-            />
-            <Box
-              component="img"
-              src="/images/design_your_own.webp"
-              alt="design"
-              sx={{ width: 80, height: 40 }}
-            />
-          </Box>
-
-          <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
-            <Typography
-              variant="subtitle1"
-              sx={{
-                color: showError ? "red" : "inherit",
-              }}
-            >
+          <Box className="size-header">
+            <Typography sx={{ color: showError ? "red" : "inherit" }}>
               Select Size
             </Typography>
-            <Typography variant="subtitle1" sx={{ cursor: "pointer" }}>
-              Size Guide
+            <Typography className="size-guide" >
+              <DesignServicesRoundedIcon fontSize="small" />
+              <span className="guide-icon" /> Size Guide
             </Typography>
           </Box>
 
@@ -254,101 +165,45 @@ Nike Members enjoy free returns.`,
             value={selectedSize}
             exclusive
             onChange={handleSizeChange}
-            sx={{
-              flexWrap: "wrap",
-              gap: 1,
-              border: showError ? "1px solid red" : "none",
-              padding: "10px 0px ",
-            }}
+            className={`size-group ${showError ? "error" : ""}`}
           >
-            <Box
-              sx={{
-                margin: "0px auto",
-                display: "grid",
-                gridTemplateColumns: "repeat(2, minmax(0px, 1fr))",
-                gap: "7px",
-                maxWidth: "100%",
-                border: "1px solid transparent",
-              }}
-            >
-              {availableSizes.map((size) => (
-                <ToggleButton
-                  key={size}
-                  value={size}
-                  sx={{
-                    height: 50,
-                    width: 180,
-                    color: "black",
-                    textTransform: "none",
-                    "&:hover": {
-                      border: "1px solid black",
-                      backgroundColor: "white",
-                    },
-                    "&.Mui-selected": {
-                      backgroundColor: "white",
-                      border: "1px solid black",
-                      color: "black",
-                    },
-                    "&.Mui-selected:hover": {
-                      backgroundColor: "white",
-                      border: "1px solid black",
-                    },
-                  }}
-                >
-                  {size}
-                </ToggleButton>
-              ))}
-            </Box>
+            {availableSizes.map((size) => (
+              <ToggleButton
+                key={size}
+                value={size}
+                className={`size-button ${
+                  disabledSizes.includes(size) ? "disabled" : ""
+                }`}
+                disabled={disabledSizes.includes(size)}
+              >
+                {size}
+              </ToggleButton>
+            ))}
           </ToggleButtonGroup>
+
           {showError && (
-            <Typography sx={{ color: "red", mt: 2, fontSize: "1rem" }}>
-              Please select a size
-            </Typography>
+            <Typography className="error-msg">Please select a size</Typography>
           )}
 
-          <Box sx={{ mt: 2 }}>
+          <Box className="actions">
             <Button
               variant="contained"
               onClick={handleAddCart}
-              sx={{
-                backgroundColor: "black",
-                borderRadius: 50,
-                width: "370px",
-                margin: "18px 24px 10px 0px",
-                padding: "20px",
-                textTransform: "none",
-                fontWeight: "bold",
-                fontSize: "1rem",
-                lineHeight: 1.5,
-              }}
+              className="btn add-to-bag"
             >
               Add to Bag
             </Button>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "white",
-                borderRadius: 50,
-                width: "370px",
-                color: "black",
-                margin: "18px 24px 10px 0px",
-                padding: "20px",
-                border: "1px solid gray",
-                "&:hover": {
-                  border: "1px solid black",
-                },
-                textTransform: "none",
-                fontWeight: "bold",
-                fontSize: "1rem",
-                lineHeight: 1.5,
-              }}
-            >
-              Favorite
-              <FavoriteBorderRoundedIcon className="product-fav-icon" />
+            <Button variant="outlined" className="btn favorite">
+              Favorite <FavoriteBorderRoundedIcon sx={{ ml: 1 }} />
             </Button>
           </Box>
-          <ProductDescription {...productDescriptionData} />
-          <Box sx={{ height: 200 }} />
+
+          <Box className="product-description">
+            <ProductDescription {...productDescriptionData} />
+          </Box>
+
+          {/* Optional padding to allow full scroll */}
+          <Box sx={{ height: 100 }} />
         </Box>
       </Box>
       <Footer />

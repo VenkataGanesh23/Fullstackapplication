@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupformdata, signupschema } from "../../validations/Signupschema";
 import ReusableTextField from "../reusable/ReusableTextfield";
-import { SIGNUP} from "../graphql/queries";
+import { SIGNUP} from "../graphql/Mutations";
 import { useMutation } from "@apollo/client";
 
 const Signup: React.FC = () => {

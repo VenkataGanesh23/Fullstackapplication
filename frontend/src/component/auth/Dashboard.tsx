@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import Navbar from "../reusable/Nav&Footer/Navbar";
-import { useEffect, useState, useRef } from "react";
 import mainimage from "../../assets/mainimage.avif";
 import img1 from "../../assets/shoes/nike-just-do-it3.avif";
 import img2 from "../../assets/shoes/nike-just-do-it1.avif";
@@ -11,12 +10,30 @@ import img7 from "../../assets/submain/image1.avif";
 import img8 from "../../assets/submain/image3.avif";
 import { Box, Typography, Button } from "@mui/material";
 import Footer from "../reusable/Nav&Footer/Footer";
-import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
-import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded";
 import secondmainimg from "../../assets/image.avif";
-import ShopBySport from "../reusable/Carousel/Carouselsports";
+import Carousel from "../reusable/Carousel/Carousel";
+import img9 from "../../assets/sports/nike-sports.avif";
+import img10 from "../../assets/sports/nike-sports1.avif";
+import img11 from "../../assets/sports/nike-sports2.avif";
+import img12 from "../../assets/sports/nike-sports3.avif";
+import img13 from "../../assets/sports/nike-sports4.avif";
 
-const carouselImages = [img1, img2, img4, img5,img2,img4];
+const carouselItems = [
+  { image: img1 },
+  { image: img2 },
+  { image: img4 },
+  { image: img5 },
+  { image: img2 },
+];
+
+const carouselItems2 = [
+  { image: img9, button: "Skateboarding" },
+  { image: img10, button: "Tennis" },
+  { image: img11, button: "Yoga" },
+  { image: img12, button: "Basketball" },
+  { image: img13, button: "Running" },
+];
+
 const carouselImages2 = [
   { src: img6, label: "Trail ready in style" },
   { src: img7, label: "Game Time Must-Haves" },
@@ -24,60 +41,15 @@ const carouselImages2 = [
 ];
 
 const Dashboard = () => {
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-  const [activeArrow, setActiveArrow] = useState<"left" | "right" | null>(null);
   const navigate = useNavigate();
-
-  // Separate scrollRef for Shop by Icons
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleShoes = () => {
     navigate("/Shoes");
   };
 
- const updateScrollButtons = () => {
-  const el = scrollRef.current;
-  if (el) {
-    const scrollLeft = Math.round(el.scrollLeft);
-    const maxScrollLeft = Math.round(el.scrollWidth - el.clientWidth);
-
-    setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft < maxScrollLeft);
-  }
-};
-
-  const handleScroll = (direction: "left" | "right") => {
-  const scrollAmount = 470;
-  if (scrollRef.current) {
-    scrollRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
-
-    // Defer updateScrollButtons until after browser completes scroll
-    requestAnimationFrame(() => {
-      setTimeout(updateScrollButtons, 300);
-    });
-
-    setActiveArrow(direction);
-  }
-};
-
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    updateScrollButtons();
-    el.addEventListener("scroll", updateScrollButtons);
-    return () => el.removeEventListener("scroll", updateScrollButtons);
-  }, []);
-
   return (
     <>
       <Navbar />
-      {/* Hero Image */}
       <Box sx={{ px: { xs: 2, md: 4 }, py: 4, textAlign: "center" }}>
         <Box
           component="img"
@@ -86,14 +58,12 @@ const Dashboard = () => {
           sx={{
             width: "100%",
             height: "500px",
-            borderRadius: 2,
             boxShadow: 3,
             objectFit: "cover",
           }}
         />
       </Box>
 
-      {/* Banner with Button */}
       <Box sx={{ backgroundColor: "#fff", textAlign: "center", py: 6, px: 2 }}>
         <Typography
           variant="h3"
@@ -130,7 +100,6 @@ const Dashboard = () => {
         </Button>
       </Box>
 
-      {/* Featured Section */}
       <Typography sx={{ fontWeight: "bold", fontSize: 22, mt: 5, px: 7 }}>
         Featured
       </Typography>
@@ -145,21 +114,34 @@ const Dashboard = () => {
           px: 7,
           py: 2,
           "&::-webkit-scrollbar": { height: 6 },
-          "&::-webkit-scrollbar-thumb": { backgroundColor: "#999", borderRadius: 3 },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "#999",
+            borderRadius: 3,
+          },
         }}
       >
         {carouselImages2.map((item, i) => (
-          <Box key={i} sx={{ minWidth: 450 }}>
+          <Box key={i} sx={{ minWidth: 450, position: "relative" }}>
             <Box
-              component="img"
-              src={item.src}
-              alt={item.label}
               sx={{
+                position: "relative",
                 width: 450,
                 height: 450,
-                objectFit: "cover",
+                borderRadius: 2,
+                overflow: "hidden",
               }}
-            />
+            >
+              <Box
+                component="img"
+                src={item.src}
+                alt={item.label}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            </Box>
             <Typography
               sx={{
                 mt: 5,
@@ -174,7 +156,6 @@ const Dashboard = () => {
         ))}
       </Box>
 
-      {/* The Latest Section */}
       <Typography
         sx={{
           font: "500 1.5rem/1.2 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
@@ -197,7 +178,6 @@ const Dashboard = () => {
         />
       </Box>
 
-      {/* Promo Banner */}
       <Box sx={{ backgroundColor: "#fff", textAlign: "center", py: 0, px: 2 }}>
         <Typography>Luca 4</Typography>
         <Typography
@@ -243,108 +223,21 @@ const Dashboard = () => {
         </Button>
       </Box>
 
-      {/* Arrow Controls & Shop by Icons */}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          mt: 6,
-          px: 7,
-        }}
-      >
-        <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>
-          Shop by Icons
-        </Typography>
-
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Box
-            onClick={() => canScrollLeft && handleScroll("left")}
-            sx={{
-              backgroundColor: canScrollLeft ? "#f5f5f5" : "#E5E5E5",
-              borderRadius: "50%",
-              cursor: canScrollLeft ? "pointer" : "default",
-              p: 1,
-              border:
-                activeArrow === "left"
-                  ? "2px solid #1976d2"
-                  : "2px solid transparent",
-              pointerEvents: canScrollLeft ? "auto" : "none",
-              "&:hover": {
-                backgroundColor: canScrollLeft ? "#e0e0e0" : "#E5E5E5",
-              },
-            }}
-          >
-            <NavigateBeforeRoundedIcon
-              sx={{
-                fontSize: 40,
-                color: canScrollLeft ? "black" : "#aaa",
-              }}
-            />
-          </Box>
-
-          <Box
-            onClick={() => canScrollRight && handleScroll("right")}
-            sx={{
-              backgroundColor: canScrollRight ? "#f5f5f5" : "#E5E5E5",
-              borderRadius: "50%",
-              cursor: canScrollRight ? "pointer" : "default",
-              p: 1,
-              border:
-                activeArrow === "right"
-                  ? "2px solid #1976d2"
-                  : "2px solid transparent",
-              pointerEvents: canScrollRight ? "auto" : "none",
-              "&:hover": {
-                backgroundColor: canScrollRight ? "#e0e0e0" : "#E5E5E5",
-              },
-            }}
-          >
-            <NavigateNextRoundedIcon
-              sx={{
-                fontSize: 40,
-                color: canScrollRight ? "black" : "#aaa",
-              }}
-            />
-          </Box>
-        </Box>
-      </Box>
-
-      {/* Shop by Icons Carousel */}
-      <Box
-        ref={scrollRef}
-        sx={{
-          mt: 4,
-          display: "flex",
-          gap: 2,
-          overflowX: "auto",
-          scrollBehavior: "smooth",
-          px: 7,
-          py: 2,
-          "&::-webkit-scrollbar": {
-            height: 6,
-          },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "#999",
-            borderRadius: 3,
-          },
-        }}
-      >
-        {carouselImages.map((img, i) => (
-          <Box
-            key={i}
-            component="img"
-            src={img}
-            sx={{
-              width: 450,
-              height: 450,
-              objectFit: "cover",
-            }}
-          />
-        ))}
-      </Box>
-
-      <ShopBySport />
+      <Carousel
+        title="SHOP BY ICONS"
+        items={carouselItems}
+        itemWidth={450}
+        itemHeight={450}
+        className="dashboard-carousel1"
+      />
+      <Carousel
+        title="SHOP BY SPORT"
+        items={carouselItems2}
+        itemWidth={450}
+        itemHeight={300}
+        className="dashboard-carousel2"
+        // showButtonsOnImages
+      />
       <Footer />
     </>
   );
