@@ -5,7 +5,7 @@ import ReusableTextField from "../reusable/ReusableTextfield";
 import { useForm } from "react-hook-form";
 import { loginformdata, Loginschema } from "../../validations/Loginschema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LOGIN } from "../graphql/queries";
+import { LOGIN } from "../graphql/Mutations";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";

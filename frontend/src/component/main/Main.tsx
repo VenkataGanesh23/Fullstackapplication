@@ -9,6 +9,9 @@ import { ProtectedRoute } from "../routing/Protectedroutes";
 import { useAuth } from "../../context/AuthContext";
 import Shoes from "../reusable/Shoes";
 import ProductDetails from "../reusable/Products/ProductDetails";
+import { useParams } from "react-router-dom";
+import Jordan from "../auth/Jordan";
+
 
 const Main: React.FC = () => {
   const { user } = useAuth();
@@ -23,14 +26,15 @@ const Main: React.FC = () => {
         <Route
           path="/dashboard"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <Dashboard />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
         <Route path="/shoes" element={<Shoes />} />
-        {/* <Route path="*" element={<Navigate to="/" replace />} />  */}
+        <Route path="*" element={<Navigate to="/" replace />} /> 
         <Route path="/Productdetails" element={<ProductDetails/>}/>
+        <Route path="/Jordan" element={<Jordan/>}/>
       </Routes>
     </BrowserRouter>
   );

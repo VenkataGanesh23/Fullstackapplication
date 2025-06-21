@@ -5,8 +5,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Passwordschema, Passworddata } from "../../validations/Passwordschema";
 import { useMutation } from "@apollo/client";
-import { NEW_PASSWORD} from "../graphql/queries";  // Your resetPassword mutation
+import { NEW_PASSWORD} from "../graphql/Mutations";  // Your resetPassword mutation
 import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Newpassword: React.FC = () => {
   const { handleSubmit, reset, control } = useForm<Passworddata>({
@@ -18,7 +19,8 @@ const Newpassword: React.FC = () => {
   });
 
   const [searchParams] = useSearchParams();
-  const token = searchParams.get("token");
+  // const token = searchParams.get("token");
+  const { token } = useParams<{ token: string }>();
 
   const [resetPassword] = useMutation(NEW_PASSWORD);
 

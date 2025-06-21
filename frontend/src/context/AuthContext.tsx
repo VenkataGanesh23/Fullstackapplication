@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { NEW_PASSWORD, REQUEST_PASSWORD_RESET } from "../component/graphql/queries";
+import { NEW_PASSWORD, REQUEST_PASSWORD_RESET } from "../component/graphql/Mutations";
 import { useMutation } from "@apollo/client";
 
 interface AuthContectType {
@@ -53,12 +53,13 @@ const login = (token: string) => {
   };
 
   const newPassword = async (token: string, password: string) => {
-    try {
-      await newPasswordMutation({ variables: { token, password } });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  try {
+    await newPasswordMutation({ variables: { token, newPassword: password } });
+  } catch (err) {
+    console.log("New password mutation failed:", err);
+  }
+};
+
   return (
     <AuthContext.Provider
       value={{
