@@ -5,11 +5,18 @@ export const productResolver = {
     getAllProducts: () => productRepository.getAllProducts(),
     getProductById: (_: any, args: { id: number }) =>
       productRepository.getProductById(args.id),
+    getProductsByCategory: (_: any, args: { categoryId: number }) =>
+      productRepository.getProductsByCategory(args.categoryId),
   },
-   Mutation: {
+
+  Mutation: {
     createProduct: (_: any, args: { data: any }) =>
-       productRepository.createProduct(args.data),
+      productRepository.createProduct(args.data),
+    updateProduct: (_: any, args: { id: number; data: any }) =>
+      productRepository.updateProduct(args.id, args.data),
     deleteProduct: (_: any, args: { id: number }) =>
       productRepository.deleteProduct(args.id),
+    restoreProduct: (_: any, args: { id: number }) =>
+      productRepository.restoreProduct(args.id),
   },
 };

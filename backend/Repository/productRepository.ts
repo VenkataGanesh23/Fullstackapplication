@@ -4,15 +4,12 @@ import { responseStatus } from "../src/helper/static";
 export const productRepository = {
   async createProduct(data: any) {
     try {
-      console.log("I am here")
       const product = await productService.create(data);
-      console.log(product, "hello")
       return {
         status: responseStatus(200, "Product created successfully"),
         product,
       };
-    } catch (err) {
-      console.log(err, "hello")
+    } catch (error) {
       return {
         status: responseStatus(500, "Failed to create product"),
       };
@@ -26,7 +23,7 @@ export const productRepository = {
         status: responseStatus(200, "Products fetched successfully"),
         products,
       };
-    } catch (err) {
+    } catch (error) {
       return {
         status: responseStatus(500, "Failed to fetch products"),
         products: [],
@@ -47,10 +44,39 @@ export const productRepository = {
         status: responseStatus(200, "Product found"),
         product,
       };
-    } catch (err) {
+    } catch (error) {
       return {
         status: responseStatus(500, "Failed to fetch product"),
         product: null,
+      };
+    }
+  },
+
+  async getProductsByCategory(categoryId: number) {
+    try {
+      const products = await productService.getByCategory(categoryId);
+      return {
+        status: responseStatus(200, "Products fetched successfully"),
+        products,
+      };
+    } catch (error) {
+      return {
+        status: responseStatus(500, "Failed to fetch products by category"),
+        products: [],
+      };
+    }
+  },
+
+  async updateProduct(id: number, data: any) {
+    try {
+      const product = await productService.update(id, data);
+      return {
+        status: responseStatus(200, "Product updated successfully"),
+        product,
+      };
+    } catch (error) {
+      return {
+        status: responseStatus(500, "Failed to update product"),
       };
     }
   },
@@ -59,8 +85,22 @@ export const productRepository = {
     try {
       await productService.delete(id);
       return responseStatus(200, "Product deleted");
-    } catch (err) {
+    } catch (error) {
       return responseStatus(500, "Failed to delete product");
+    }
+  },
+
+  async restoreProduct(id: number) {
+    try {
+      const product = await productService.restore(id);
+      return {
+        status: responseStatus(200, "Product restored successfully"),
+        product,
+      };
+    } catch (error) {
+      return {
+        status: responseStatus(500, "Failed to restore product"),
+      };
     }
   },
 };
