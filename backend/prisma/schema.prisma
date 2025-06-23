@@ -82,10 +82,10 @@ model CartItem {
 }
 
 model Content {
-  id          Int      @id @default(autoincrement())
-  title       String
-  images      String[]
+  id           Int      @id @default(autoincrement())
+  title        String
+  images       String[]
   descriptions String[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
 }

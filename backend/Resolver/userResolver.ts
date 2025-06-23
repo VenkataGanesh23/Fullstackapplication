@@ -1,5 +1,5 @@
 // resolvers.ts
-import { Context } from '../src/context';
+import { Context } from '../src/utils/context';
 import { Prisma,User } from '@prisma/client';
 import { userService } from '../graphql/layers';
 
