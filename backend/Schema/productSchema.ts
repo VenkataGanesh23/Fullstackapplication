@@ -13,6 +13,7 @@ export const productTypeDefs = gql`
     name: String!
     description: String!
     price: Float!
+    gender: String!
     category: Category!
     subCategory: String!
     brand: String!
@@ -40,6 +41,7 @@ export const productTypeDefs = gql`
     name: String!
     description: String!
     price: Float!
+    gender: String!
     categoryId: Int!
     subCategory: String!
     brand: String!

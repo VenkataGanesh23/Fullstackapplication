@@ -29,6 +29,7 @@ model Product {
   name        String
   description String
   price       Float
+  gender      String
   subCategory String
   brand       String
   sizes       String[]
@@ -78,4 +79,13 @@ model CartItem {
 
   @@unique([cartId, productId, size, color])  // Prevent duplicate cart items with same product + variant
   @@index([cartId])
+}
+
+model Content {
+  id          Int      @id @default(autoincrement())
+  title       String
+  images      String[]
+  descriptions String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

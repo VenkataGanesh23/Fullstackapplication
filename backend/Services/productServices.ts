@@ -8,6 +8,7 @@ export const productService = {
         name: data.name,
         description: data.description,
         price: data.price,
+        gender: data.gender,
         subCategory: data.subCategory,
         brand: data.brand,
         sizes: data.sizes,
