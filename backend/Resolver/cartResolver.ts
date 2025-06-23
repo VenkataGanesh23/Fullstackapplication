@@ -1,4 +1,4 @@
-import { Context } from '../src/context';
+import { Context } from '../src/utils/context';
 import { cartService } from '../graphql/layers';
 
 export const cartResolver = {
