@@ -55,6 +55,7 @@ export const productTypeDefs = gql`
     name: String
     description: String
     price: Float
+    gender: String
     categoryId: Int
     subCategory: String
     brand: String
