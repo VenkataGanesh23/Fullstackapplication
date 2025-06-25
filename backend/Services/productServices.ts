@@ -43,16 +43,29 @@ export const productService = {
     }),
 
   update: (id: number, data: any) =>
-    prisma.product.update({
-      where: { id },
-      data: {
-        ...data,
-        ...(data.categoryId && {
-          category: { connect: { id: data.categoryId } },
-        }),
-      },
-      include: { category: true },
-    }),
+  prisma.product.update({
+    where: { id },
+    data: {
+      ...(data.name && { name: data.name }),
+      ...(data.description && { description: data.description }),
+      ...(data.price !== undefined && { price: data.price }),
+      ...(data.gender && { gender: data.gender }),
+      ...(data.subCategory && { subCategory: data.subCategory }),
+      ...(data.brand && { brand: data.brand }),
+      ...(data.stock !== undefined && { stock: data.stock }),
+      ...(data.isActive !== undefined && { isActive: data.isActive }),
+
+      ...(data.sizes && { sizes: { set: data.sizes } }),
+      ...(data.colors && { colors: { set: data.colors } }),
+      ...(data.images && { images: { set: data.images } }),
+
+      ...(data.categoryId && {
+        category: { connect: { id: data.categoryId } },
+      }),
+    },
+    include: { category: true },
+  }),
+
 
   delete: (id: number) =>
     prisma.product.update({
