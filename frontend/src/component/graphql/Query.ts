@@ -1,18 +1,82 @@
 import { gql } from "@apollo/client";
 
+export const GET_ALL_CONTENT=gql`
+query Query {
+  getAllContents {
+    id
+    title
+    images
+    descriptions
+    createdAt
+    updatedAt
+  }
+}
+`
+
+export const GET_ALL_CONTENT_BY_ID=gql`
+query Query($getContentByIdId: Int!) {
+  getContentById(id: $getContentByIdId) {
+    id
+    title
+    images
+    descriptions
+    createdAt
+    updatedAt
+  }
+}
+`
+
 export const GET_ALL_PRODUCTS = gql`
-  query GetAllProducts {
-    getAllProducts {
+query Query {
+  getAllProducts {
+    status {
+      code
+      message
+    }
+    products {
+      id
+      name
+      description
+      price
+      category {
+        id
+        name
+        description
+        createdAt
+      }
+      subCategory
+      brand
+      sizes
+      colors
+      images
+      stock
+      isActive
+      createdAt
+      updatedAt
+      userId
+    }
+  }
+}
+`;
+
+export const GET_PRODUCT_BY_ID = gql`
+  query GetProductById($id: Int!) {
+    getProductById(id: $id) {
       status {
         code
         message
       }
-      products {
+      product {
         id
         name
         description
         price
-        category
+        category {
+          id
+          name
+          description
+          createdAt
+        }
         subCategory
         brand
         sizes
@@ -28,9 +92,10 @@ export const GET_ALL_PRODUCTS = gql`
   }
 `;
 
-export const GET_PRODUCT_BY_ID=gql`
-query Query($getProductByIdId: Int!) {
-  getProductById(id: $getProductByIdId) {
+
+export const RESTORE_PRODUCT_BY_ID=gql`
+mutation Mutation($restoreProductId: Int!) {
+  restoreProduct(id: $restoreProductId) {
     status {
       code
       message
@@ -40,7 +105,12 @@ query Query($getProductByIdId: Int!) {
       name
       description
       price
-      category
+      category {
+        id
+        name
+        description
+        createdAt
+      }
       subCategory
       brand
       sizes
@@ -55,8 +125,42 @@ query Query($getProductByIdId: Int!) {
   }
 }
 `
+
+export const UPDATE_PRODUCT_ID=gql`
+query Query($categoryId: Int!) {
+  getProductsByCategory(categoryId: $categoryId) {
+    status {
+      code
+      message
+    }
+    products {
+      id
+      name
+      description
+      price
+      category {
+        id
+        name
+        description
+        createdAt
+      }
+      subCategory
+      brand
+      sizes
+      colors
+      images
+      stock
+      isActive
+      createdAt
+      updatedAt
+      userId
+    }
+  }
+}
+`
+
 export const GET_ALL_CATEGORIES=gql`
-query GetAllCategories {
+query Query {
   getAllCategories {
     code
     message
@@ -70,7 +174,7 @@ query GetAllCategories {
 }
 `
 export const GET_CATEGORIES_BY_ID=gql`
-query GetAllCategories($getCategoryByIdId: Int!) {
+query Query($getCategoryByIdId: Int!) {
   getCategoryById(id: $getCategoryByIdId) {
     code
     message
@@ -79,6 +183,38 @@ query GetAllCategories($getCategoryByIdId: Int!) {
       name
       description
       createdAt
+    }
+  }
+}
+`
+export const GET_PRODUCT_BY_CATEGORY=gql`
+query Query($categoryId: Int!) {
+  getProductsByCategory(categoryId: $categoryId) {
+    status {
+      code
+      message
+    }
+    products {
+      id
+      name
+      description
+      price
+      category {
+        id
+        name
+        description
+        createdAt
+      }
+      subCategory
+      brand
+      sizes
+      colors
+      images
+      stock
+      isActive
+      createdAt
+      updatedAt
+      userId
     }
   }
 }

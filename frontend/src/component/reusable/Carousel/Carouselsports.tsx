@@ -2,21 +2,14 @@ import { Box, Typography, Button } from "@mui/material";
 import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded";
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
 import { useRef, useState, useEffect } from "react";
-import img9 from "../../../assets/sports/nike-sports.avif";
-import img10 from "../../../assets/sports/nike-sports1.avif";
-import img11 from "../../../assets/sports/nike-sports2.avif";
-import img12 from "../../../assets/sports/nike-sports.avif";
-import img13 from "../../../assets/sports/nike-sports4.avif";
 
-const sports = [
-  { title: "Skateboarding", img: img9 },
-  { title: "Tennis", img: img10 },
-  { title: "Yoga", img: img11 },
-  { title: "Basketball", img: img12 },
-  { title: "Running", img: img13 },
-];
+type ShopBySportProps = {
+  title: string;
+  images: string[];
+  descriptions: string[];
+};
 
-const ShopBySport = () => {
+const ShopBySport = ({ title, images, descriptions }: ShopBySportProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -58,11 +51,10 @@ const ShopBySport = () => {
         }}
       >
         <Typography sx={{ fontWeight: "bold", fontSize: 24, pl: 6 }}>
-          Shop By Sport
+          {title}
         </Typography>
 
         <Box sx={{ display: "flex", gap: 2 }}>
-          {/* Left Arrow */}
           <Box
             onClick={() => {
               if (canScrollLeft) {
@@ -88,7 +80,6 @@ const ShopBySport = () => {
             />
           </Box>
 
-          {/* Right Arrow */}
           <Box
             onClick={() => {
               if (canScrollRight) {
@@ -142,24 +133,23 @@ const ShopBySport = () => {
           },
         }}
       >
-        {sports.map((item, i) => (
+        {images.map((img, i) => (
           <Box
             key={i}
             sx={{
               flex: "0 0 auto",
-              width: 400,
+              width: 450,
               height: 300,
               position: "relative",
               overflow: "hidden",
               boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-              //   border: selectedIndex === i ? "3px solid #1976d2" : "3px solid transparent",
               transition: "border 0.3s",
             }}
           >
             <Box
               component="img"
-              src={item.img}
-              alt={item.title}
+              src={img}
+              alt={descriptions[i]}
               sx={{
                 width: "100%",
                 height: "100%",
@@ -171,8 +161,8 @@ const ShopBySport = () => {
               onClick={() => setSelectedIndex(i)}
               sx={{
                 position: "absolute",
-                bottom: 16,
-                left: 16,
+                bottom: 50,
+                left: 48,
                 backgroundColor: "white",
                 color: "black",
                 fontWeight: "bold",
@@ -181,13 +171,12 @@ const ShopBySport = () => {
                 px: 2,
                 py: 0.5,
                 boxShadow: 1,
-                // border: selectedIndex === i ? "2px solid #1976d2" : "2px solid transparent",
                 "&:hover": {
                   backgroundColor: "#f0f0f0",
                 },
               }}
             >
-              {item.title}
+              {descriptions[i]}
             </Button>
           </Box>
         ))}

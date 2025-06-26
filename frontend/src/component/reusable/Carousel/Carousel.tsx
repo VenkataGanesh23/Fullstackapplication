@@ -75,7 +75,7 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [activeButton]);
 
   return (
-    <Box sx={{ mt: 8, position: "relative" }}>
+    <Box sx={{ mt: 7, position: "relative" }}>
       {title && (
         <Box
           className={className}
@@ -121,11 +121,9 @@ const Carousel: React.FC<CarouselProps> = ({
       <Box
         ref={scrollRef}
         sx={{
-          mt: 3,
-          px: 7,
+          px: 5,
           py: 2,
           display: "flex",
-          gap: 3,
           overflowX: "auto",
           scrollBehavior: "smooth",
           "&::-webkit-scrollbar": {
@@ -146,7 +144,7 @@ const Carousel: React.FC<CarouselProps> = ({
           },
           scrollbarWidth: "none",
           "&:hover": {
-            scrollbarWidth: "thin",
+            scrollbarWidth: "auto",
             scrollbarColor: "#999 transparent",
           },
         }}
@@ -158,7 +156,7 @@ const Carousel: React.FC<CarouselProps> = ({
               sx={{
                 flex: "0 0 auto",
                 width: itemWidth,
-                height: itemHeight + 100,
+                height: itemHeight + 60,
                 position: "relative",
                 overflow: "visible",
               }}

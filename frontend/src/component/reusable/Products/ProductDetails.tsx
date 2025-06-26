@@ -1,5 +1,3 @@
-import Footer from "../Nav&Footer/Footer";
-import Navbar from "../Nav&Footer/Navbar";
 import {
   Box,
   Button,
@@ -7,57 +5,39 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-import { useState } from "react";
-import img1 from "../../../assets/shoes/nike-just-do-it2.avif";
-import img2 from "../../../assets/shoes/nike-just-do-it3.avif";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_PRODUCT_BY_ID } from "../../graphql/Query";
+import Navbar from "../Nav&Footer/Navbar";
+import Footer from "../Nav&Footer/Footer";
+import ProductDescription from "./ProductDescription";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import DesignServicesRoundedIcon from "@mui/icons-material/DesignServicesRounded";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import ProductDescription from "./ProductDescription";
+import { useState } from "react";
 import "../../css/Productdetails.css";
-import DesignServicesRoundedIcon from "@mui/icons-material/DesignServicesRounded";
-
-
-const mockImages = [img1, img1, img1, img1, img2];
-
-const availableSizes = [
-  "UK 5.5",
-  "UK 6 (EU 39)",
-  "UK 6 (EU 40)",
-  "UK 6.5",
-  "UK 7",
-  "UK 7.5",
-  "UK 8",
-  "UK 8.5",
-  "UK 9",
-  "UK 9.5",
-  "UK 10",
-  "UK 10.5",
-  "UK 11",
-  "UK 12",
-  "UK 12.5",
-  "UK 13",
-  "UK 13.5",
-];
-const disabledSizes = ["UK 5.5", "UK 6 (EU 39)", "UK 6.5"];
 
 const ProductDetails = () => {
+  const { id } = useParams();
+  const { data, loading, error } = useQuery(GET_PRODUCT_BY_ID, {
+    variables: { id: parseInt(id || "0") },
+  });
+
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [showError, setShowError] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
 
-  const handleNextImage = () => {
-    setImageIndex((prev) => (prev + 1) % mockImages.length);
-  };
+  if (loading) return <Typography>Loading...</Typography>;
+  if (error || !data?.getProductById?.product)
+    return <Typography>Product not found.</Typography>;
 
-  const handlePrevImage = () => {
-    setImageIndex((prev) => (prev === 0 ? mockImages.length - 1 : prev - 1));
-  };
+  const product = data.getProductById.product;
+  const availableSizes = product.sizes || [];
+  const images = product.images || [];
+  const disabledSizes: string[] = [];
 
-  const handleSizeChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newSize: string | null
-  ) => {
+  const handleSizeChange = (_: any, newSize: string | null) => {
     if (!disabledSizes.includes(newSize || "")) {
       setSelectedSize(newSize);
     }
@@ -72,50 +52,33 @@ const ProductDetails = () => {
     }
   };
 
-  const productDescriptionData = {
-    about: "Created for the hardwood but taken to the streets...",
-    color: "Colour Shown: White/White/Black",
-    style: "Style: DD1391-100",
-    origin: "Country/Region of Origin: China, Indonesia, Vietnam",
-    productDetails: "View Product Details",
-    deliveryReturns: `All purchases are subject to delivery fees.`,
-    reviews: "No reviews yet",
-    declaration:
-      "Declaration of Importer: Direct import by the individual customer",
-    marketedBy:
-      "Marketed by: Nike Global Trading B.V. Singapore Branch, 30 Pasir Panjang Road...",
-    note: "The ® may appear once or twice on the tongue and/or sockliner...",
+  const handleNextImage = () => {
+    setImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const handlePrevImage = () => {
+    setImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   return (
     <>
       <Navbar />
-      <Box
-        sx={{
-          display: "flex",
-          height: "100vh",
-          overflow: "hidden",
-        }}
-      >
+      <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
         {/* Left Section */}
         <Box className="left-section">
           <Box className="thumbnails">
-            {mockImages.map((img, index) => (
+            {images.map((img: string, i: number) => (
               <img
-                key={index}
+                key={i}
                 src={img}
-                alt={`thumb-${index}`}
-                className={`thumbnail ${imageIndex === index ? "active" : ""}`}
-                onMouseEnter={() => setImageIndex(index)}
+                alt={`thumb-${i}`}
+                className={`thumbnail ${imageIndex === i ? "active" : ""}`}
+                onMouseEnter={() => setImageIndex(i)}
               />
             ))}
           </Box>
           <Box className="main-image-wrapper">
-            <img
-              src={mockImages[imageIndex]}
-              alt="main"
-              className="main-image"
-            />
+            <img src={images[imageIndex]} alt="main" className="main-image" />
             <Box className="image-nav-buttons">
               <ArrowBackIosNewRoundedIcon
                 onClick={handlePrevImage}
@@ -129,23 +92,21 @@ const ProductDetails = () => {
           </Box>
         </Box>
 
-        {/* Right Section (scrollable only) */}
+        {/* Right Section */}
         <Box
           className="right-section"
           sx={{
             overflowY: "auto",
             height: "100vh",
             pr: 3,
-            scrollbarWidth: "none", // Firefox
-            "&::-webkit-scrollbar": {
-              display: "none", // Chrome/Safari
-            },
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
           }}
         >
-          <Typography variant="h6" sx={{mt:8}}>Nike Dunk Low Retro</Typography>
-          <Typography color="text.secondary">Men's Shoe</Typography>
+          <Typography variant="h6" sx={{ mt: 8 }}>{product.name}</Typography>
+          <Typography color="text.secondary">{product.brand}</Typography>
           <Typography variant="h5" sx={{ mt: 1 }}>
-            MRP : ₹ 8,295.00
+            MRP : ₹ {product.price}
           </Typography>
           <Typography className="tax-info">
             Inclusive of all taxes <br /> (Also includes all applicable duties)
@@ -155,9 +116,8 @@ const ProductDetails = () => {
             <Typography sx={{ color: showError ? "red" : "inherit" }}>
               Select Size
             </Typography>
-            <Typography className="size-guide" >
-              <DesignServicesRoundedIcon fontSize="small" />
-              <span className="guide-icon" /> Size Guide
+            <Typography className="size-guide">
+              <DesignServicesRoundedIcon fontSize="small" /> Size Guide
             </Typography>
           </Box>
 
@@ -167,7 +127,7 @@ const ProductDetails = () => {
             onChange={handleSizeChange}
             className={`size-group ${showError ? "error" : ""}`}
           >
-            {availableSizes.map((size) => (
+            {availableSizes.map((size: string) => (
               <ToggleButton
                 key={size}
                 value={size}
@@ -199,10 +159,9 @@ const ProductDetails = () => {
           </Box>
 
           <Box className="product-description">
-            <ProductDescription {...productDescriptionData} />
+            <ProductDescription product={product} />
           </Box>
 
-          {/* Optional padding to allow full scroll */}
           <Box sx={{ height: 100 }} />
         </Box>
       </Box>
