@@ -79,9 +79,22 @@ mutation Mutation($deleteProductId: Int!) {
   }
 }
 `
+export const CREATE_CONTENT_INPUT=gql`
+mutation Mutation($data: ContentInput!) {
+  createContent(data: $data) {
+    id
+    title
+    images
+    descriptions
+    createdAt
+    updatedAt
+  }
+}
+`
+
 export const CREATE_CATEGORY=gql`
-mutation Mutation($name: String!, $description: String) {
-  createCategory(name: $name, description: $description) {
+mutation Mutation($name: String!) {
+  createCategory(name: $name) {
     code
     message
     category {
@@ -94,8 +107,8 @@ mutation Mutation($name: String!, $description: String) {
 }
 `
 export const DELETE_CATEGORY=gql`
-mutation Mutation($name: String!, $description: String) {
-  createCategory(name: $name, description: $description) {
+mutation Mutation($deleteCategoryId: Int!) {
+  deleteCategory(id: $deleteCategoryId) {
     code
     message
     category {

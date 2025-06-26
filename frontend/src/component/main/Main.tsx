@@ -7,11 +7,9 @@ import Newpassword from "../auth/Newpassword";
 import Dashboard from "../auth/Dashboard";
 import { ProtectedRoute } from "../routing/Protectedroutes";
 import { useAuth } from "../../context/AuthContext";
-import Shoes from "../reusable/Shoes";
+import Shoes from "../reusable/Drawer/DrawerPage";
 import ProductDetails from "../reusable/Products/ProductDetails";
-import { useParams } from "react-router-dom";
 import Jordan from "../auth/Jordan";
-
 
 const Main: React.FC = () => {
   const { user } = useAuth();
@@ -19,7 +17,10 @@ const Main: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={!user ? <Login /> : <Navigate to="/dashboard" replace />} />
+        <Route
+          path="/"
+          element={!user ? <Login /> : <Navigate to="/dashboard" replace />}
+        />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/newpassword/:token" element={<Newpassword />} />
@@ -32,9 +33,9 @@ const Main: React.FC = () => {
           }
         />
         <Route path="/shoes" element={<Shoes />} />
-        <Route path="*" element={<Navigate to="/" replace />} /> 
-        <Route path="/Productdetails" element={<ProductDetails/>}/>
-        <Route path="/Jordan" element={<Jordan/>}/>
+        {/* <Route path="*" element={<Navigate to="/" replace />} />  */}
+        <Route path="/Productdetails/:id" element={<ProductDetails />} />
+        <Route path="/Jordan" element={<Jordan />} />
       </Routes>
     </BrowserRouter>
   );
