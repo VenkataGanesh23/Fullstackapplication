@@ -10,6 +10,9 @@ import { useAuth } from "../../context/AuthContext";
 import Shoes from "../reusable/Drawer/DrawerPage";
 import ProductDetails from "../reusable/Products/ProductDetails";
 import Jordan from "../auth/Jordan";
+import Favorites from "../shopping/Favorites";
+import Cart from "../shopping/Cart";
+import DrawerPage from "../reusable/Drawer/DrawerPage";
 
 const Main: React.FC = () => {
   const { user } = useAuth();
@@ -32,10 +35,13 @@ const Main: React.FC = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/category/:categoryPath" element={<DrawerPage />} />
         <Route path="/shoes" element={<Shoes />} />
-        {/* <Route path="*" element={<Navigate to="/" replace />} />  */}
+        <Route path="*" element={<Navigate to="/" replace />} /> 
         <Route path="/Productdetails/:id" element={<ProductDetails />} />
         <Route path="/Jordan" element={<Jordan />} />
+        <Route path="/Favorites" element={<Favorites/>}/>
+        <Route path="/Cart" element={<Cart/>}/>
       </Routes>
     </BrowserRouter>
   );

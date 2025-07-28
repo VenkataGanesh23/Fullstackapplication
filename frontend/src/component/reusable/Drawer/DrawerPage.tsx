@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Layout } from "antd";
 import Drawer from "./Drawer";
 import ProductGrid from "./ProductGrid";
@@ -8,13 +9,14 @@ import { theme } from "antd";
 import "../../css/DrawerPage.css";
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import { Button, Menu, MenuItem, Typography, Box } from "@mui/material";
+import { Button, Menu, MenuItem, Typography, Box, Breadcrumbs, Link } from "@mui/material";
+import { categories, Category } from "./types";
 
 const { Sider, Content } = Layout;
 
 interface ProductGridProps {
   hideFilters: boolean;
-  sortOption: string; // Add this to your ProductGridProps interface
+  sortOption: string;
 }
 
 const DrawerPage = () => {
@@ -22,13 +24,42 @@ const DrawerPage = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const [sortOption, setSortOption] = useState<string | null>(null); // Starts as null
+  const { categoryPath } = useParams();
+  const navigate = useNavigate();
+  
+  const [sortOption, setSortOption] = useState<string | null>(null);
   const [hideFilters, setHideFilters] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [currentCategory, setCurrentCategory] = useState<Category | null>(null);
+  const [breadcrumbs, setBreadcrumbs] = useState<Category[]>([]);
+  const [subcategories, setSubcategories] = useState<Category[]>([]);
+  
   const open = Boolean(anchorEl);
 
-  const title = "Men's Shoes";
-  const filteredProducts = Array(20).fill(0);
+  useEffect(() => {
+    // Find the current category based on URL
+    const foundCategory = categories.find(cat => cat.path === categoryPath);
+    
+    if (foundCategory) {
+      setCurrentCategory(foundCategory);
+      
+      // Build breadcrumbs
+      const crumbs: Category[] = [];
+      let parentId = foundCategory.parent;
+      
+      if (parentId) {
+        const parent = categories.find(cat => cat.id === parentId);
+        if (parent) crumbs.unshift(parent);
+      }
+      
+      crumbs.push(foundCategory);
+      setBreadcrumbs(crumbs);
+      
+      // Find subcategories
+      const subs = categories.filter(cat => cat.parent === foundCategory.id);
+      setSubcategories(subs);
+    }
+  }, [categoryPath]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -42,6 +73,14 @@ const DrawerPage = () => {
     setSortOption(value);
     handleClose();
   };
+
+  const navigateToCategory = (path: string) => {
+    navigate(`/category/${path}`);
+  };
+
+  if (!currentCategory) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
@@ -63,12 +102,55 @@ const DrawerPage = () => {
           borderBottom: "1px solid #f0f0f0"
         }}
       >
-        <Typography variant="h6" style={{ fontWeight: 600 }}>
-          {title} ({filteredProducts.length})
-        </Typography>
+        <div>
+          {/* Breadcrumbs */}
+          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 1 }}>
+            {breadcrumbs.map((crumb, index) => (
+              <Link
+                key={crumb.id}
+                color={index === breadcrumbs.length - 1 ? "text.primary" : "inherit"}
+                href={`/category/${crumb.path}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateToCategory(crumb.path);
+                }}
+                sx={{
+                  textDecoration: 'none',
+                  '&:hover': { textDecoration: 'underline' },
+                  fontWeight: index === breadcrumbs.length - 1 ? 600 : 400
+                }}
+              >
+                {crumb.name}
+              </Link>
+            ))}
+          </Breadcrumbs>
+          
+          <Typography variant="h6" style={{ fontWeight: 600 }}>
+            {currentCategory.name} ({currentCategory.count})
+          </Typography>
+          
+          {/* Subcategories */}
+          {subcategories.length > 0 && (
+            <Box sx={{ display: 'flex', gap: 2, mt: 1 }}>
+              {subcategories.map(sub => (
+                <Typography 
+                  key={sub.id}
+                  variant="body2"
+                  sx={{
+                    cursor: 'pointer',
+                    '&:hover': { textDecoration: 'underline' }
+                  }}
+                  onClick={() => navigateToCategory(sub.path)}
+                >
+                  {sub.name}
+                </Typography>
+              ))}
+            </Box>
+          )}
+        </div>
         
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          {/* Filter Toggle Button - Now first in order */}
+          {/* Filter Toggle Button */}
           <Button
             startIcon={<TuneRoundedIcon />}
             onClick={() => setHideFilters(!hideFilters)}
@@ -79,7 +161,7 @@ const DrawerPage = () => {
             }}
           >
             {hideFilters ? "Show Filters" : "Hide Filters"}
-          </Button >
+          </Button>
 
           {/* Sort Dropdown */}
           <Button
@@ -93,7 +175,7 @@ const DrawerPage = () => {
               textTransform: 'none',
               color: '#000',
               fontWeight: 500,
-              opacity: sortOption ? 1 : 0.6, // 0.6 opacity when no selection
+              opacity: sortOption ? 1 : 0.6,
               '& .MuiButton-endIcon': {
                 marginLeft: '4px'
               }
@@ -152,7 +234,7 @@ const DrawerPage = () => {
         {!hideFilters && (
           <div 
             style={{
-              width: 240,
+              width: 200,
               background: colorBgContainer,
               height: "calc(100vh - 64px)",
               overflowY: "auto",
@@ -160,6 +242,8 @@ const DrawerPage = () => {
               top: 64,
               borderRight: "1px solid #f0f0f0",
               padding: "16px 0",
+              marginLeft:"60px",
+              fontWeight:"bold"
             }}
           >
             <Drawer />
@@ -176,7 +260,11 @@ const DrawerPage = () => {
             padding: "24px",
           }}
         >
-          <ProductGrid hideFilters={hideFilters} sortOption={sortOption || "featured"} />
+          <ProductGrid 
+            hideFilters={hideFilters} 
+            sortOption={sortOption || "featured"} 
+            category={currentCategory}
+          />
         </div>
       </div>
 

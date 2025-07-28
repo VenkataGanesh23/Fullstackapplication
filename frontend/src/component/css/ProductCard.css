@@ -3,7 +3,7 @@
   width: 100%; /* Changed from fixed 407px to responsive */
   max-width: 407px; /* Maximum size matches your design */
   overflow: hidden;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background-color: white;
   transition: all 0.3s ease; /* Added for smooth transitions */
   margin: 0 auto; /* Center cards in their grid cells */
@@ -57,7 +57,7 @@
   color: #111;
   font-weight: 550;
   line-height: 1.5;
-  font-family: "Helvetica Now Text Medium", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   transition: font-size 0.3s ease;
 }
 

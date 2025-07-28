@@ -1,7 +1,5 @@
 import { Typography, Box, Select, MenuItem, Button } from "@mui/material";
 import React from "react";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import FilterListOffIcon from "@mui/icons-material/FilterListOff";
 
 interface ProductHeaderProps {
   title: string;

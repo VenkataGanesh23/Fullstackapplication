@@ -23,6 +23,7 @@ type CarouselProps = {
   items?: CarouselItem[];
   itemWidth?: number;
   itemHeight?: number;
+  paddingBottom?: number; 
 };
 
 const Carousel: React.FC<CarouselProps> = ({
@@ -34,6 +35,7 @@ const Carousel: React.FC<CarouselProps> = ({
   items = [],
   itemWidth = 400,
   itemHeight = 300,
+  paddingBottom = 2, 
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -75,7 +77,7 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [activeButton]);
 
   return (
-    <Box sx={{ mt: 7, position: "relative" }}>
+    <Box sx={{ mt: 5, position: "relative" }}>
       {title && (
         <Box
           className={className}
@@ -123,6 +125,7 @@ const Carousel: React.FC<CarouselProps> = ({
         sx={{
           px: 5,
           py: 2,
+          pb: paddingBottom || 2,
           display: "flex",
           overflowX: "auto",
           scrollBehavior: "smooth",
@@ -156,7 +159,7 @@ const Carousel: React.FC<CarouselProps> = ({
               sx={{
                 flex: "0 0 auto",
                 width: itemWidth,
-                height: itemHeight + 60,
+                height: itemHeight,
                 position: "relative",
                 overflow: "visible",
               }}
@@ -213,8 +216,7 @@ const Carousel: React.FC<CarouselProps> = ({
                     fontWeight: 600,
                     fontSize: "1rem",
                     lineHeight: 1.5,
-                    fontFamily:
-                      "'Helvetica Now Text Medium', Helvetica, Arial, sans-serif",
+                    fontFamily: "'Open Sans', sans-serif",
                     color: "#111111",
                   }}
                 >
@@ -229,8 +231,7 @@ const Carousel: React.FC<CarouselProps> = ({
                     fontSize: "1rem",
                     opacity: "0.6",
                     lineHeight: 1.5,
-                    fontFamily:
-                      "'Helvetica Now Text Medium', Helvetica, Arial, sans-serif",
+                    fontFamily: "'Open Sans', sans-serif",
                     color: "#111111",
                   }}
                 >
@@ -244,12 +245,11 @@ const Carousel: React.FC<CarouselProps> = ({
                     fontWeight: 600,
                     fontSize: "1rem",
                     lineHeight: 1.5,
-                    fontFamily:
-                      "'Helvetica Now Text Medium', Helvetica, Arial, sans-serif",
+                    fontFamily: "'Open Sans', sans-serif",
                     color: "#111111",
                   }}
                 >
-                  {item.subtitle3}
+                  {`Price:₹${item.subtitle3}`}
                 </Typography>
               )}
             </Box>

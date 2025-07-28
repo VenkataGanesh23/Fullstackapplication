@@ -1,4 +1,7 @@
 @import url(https://db.onlinewebfonts.com/c/a8d7b985e4eb8c5d34f2302ffe83e917?family=Nike+Futura+ND);
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
+@import url(https://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.woff2);
+@import url(https://fonts.gstatic.com/s/opensans/v13/PRmiXeptR36kaC0GEAetxl2umOyRU7PgRiv8DXcgJjk.woff2);
 
 .forgetpassword-container {
   display: flex;
@@ -392,17 +395,22 @@ img.nike-logo-nav {
   height: 50px !important;
   width: 25px !important;
 }
+
+.jordan-page .css-1ygil4i-MuiToolbar-root {
+  background-color: #1f1f21 !important;
+}
+
+
 .nav-text,
 .css-rizt0-MuiTypography-root {
-  color: black;
+  /* color: black; */
   /* display: flex;
   justify-content: space-between !important; */
   margin: 20px !important;
   /* font-weight: 500 !important; */
   cursor: pointer;
   /* font-weight: 700 !important; */
-  font-family: "Helvetica Now Text Medium", Helvetica, Arial, sans-serif !important;
-  font: var(--podium-cds-typography-body1-strong) !important;
+  font-family: 'Open Sans', sans-serif !important;
 }
 .nav-search-icon,
 .css-3ycy3u-MuiInputBase-root .MuiInputBase-input {
@@ -417,13 +425,13 @@ img.nike-logo-nav {
   margin: 10px;
 }
 .nav-search-icon {
-  background-color: #f0f0f0 !important;
+  /* background-color: #f0f0f0 !important; */
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 
 .nav-search-icon:hover {
-  background-color: #e0e0e0 !important;
+  /* background-color: #e0e0e0 !important; */
 }
 
 .nav-search-icons {
@@ -449,7 +457,6 @@ img.nike-logo-nav {
 }
 
 .nav-icon {
-  color: black;
   margin: 0px 0px 0px 10px;
   padding: 10px;
   cursor: pointer;
@@ -459,8 +466,8 @@ img.nike-logo-nav {
 .nav-icon:hover {
   background-color: #e5e5e5;
   border-radius: 50%;
-  padding: 10px;
 }
+
 
 .jordan-logo-nav {
   width: 60px;
@@ -479,7 +486,6 @@ img.nike-logo-nav {
   font-weight: bold !important;
 }
 .nav-text-signout {
-  color: black !important;
   text-decoration: none !important;
   margin-block-start: 1em;
   margin-block-end: 1em;
@@ -495,6 +501,15 @@ img.nike-logo-nav {
   width: 140px;
   height: 70px !important;
 }
+.nav-name.dark {
+  background-color: #1F1F21;
+  color: white;
+}
+
+.nav-name.light {
+  background-color: white;
+  color: black;
+}
 .css-rvh7fc {
   justify-content: space-between;
 }
@@ -508,7 +523,7 @@ img.nike-logo-nav {
   color: #000000;
   padding: 10px;
   text-align: center;
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
   position: relative;
   height: 60px;
 }
@@ -561,12 +576,12 @@ img.main-img {
 .footer-subhead {
   font-size: 14px !important;
   line-height: 20px !important;
-  font-family: "Roboto", sans-serif !important;
-  color: #000000 !important;
+  font-family: 'Open Sans', sans-serif !important;
+  /* color: #000000 !important; */
   text-decoration: none !important;
-  opacity: 0.6;
+  opacity: 0.8;
   margin: 0px 70px 5px 30px !important;
-  font-weight: bold !important;
+  font-weight: 500 !important;
 }
 .footer-head {
   font-weight: bold !important;
@@ -600,6 +615,17 @@ img.main-img {
   height: 12px;
   margin: 12px;
 }
+/* .jordan-line {
+  background-color: black;
+} */
+
+.vertical-line.dark {
+  border-color: #fff;
+}
+
+.vertical-line.light {
+  border-color: #000;
+}
 .footer-bottom {
   display: flex;
   align-items: center;
@@ -610,8 +636,9 @@ img.main-img {
 
 .footer-left {
   font-size: 14px !important;
-  color: rgba(0, 0, 0, 0.6) !important;
-  font-weight: bold !important;
+  /* color: rgba(0, 0, 0, 0.6) !important; */
+  opacity: 0.6;
+  font-weight: 500 !important;
 }
 
 .footer-right {
@@ -619,18 +646,15 @@ img.main-img {
   gap: 40px !important;
   flex-wrap: wrap !important;
   margin-left: 20px !important;
-  font-weight: bold !important;
+  font-weight: 500 !important;
 }
 
 .footer-link {
   font-size: 14px !important;
-  color: rgba(0, 0, 0, 0.6) !important;
+  /* color: rgba(0, 0, 0, 0.6) !important; */
+  opacity: 0.6;
   text-decoration: none !important;
   transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-  color: rgba(0, 0, 0, 0.87) !important;
 }
 .css-17fpwt7-MuiGrid-root {
   margin: 20px;
@@ -702,12 +726,13 @@ img.main-img {
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.5;
-  font-family: "Helvetica Now Text", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
   /* padding: "6px 10px" */
 }
 .drawer-dropdown :hover {
   color: grey;
 }
+
 .drawer-colour {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -862,7 +887,7 @@ img.main-img {
   /* border: 1px solid #e0e0e0; */
   /* border-radius: 10px; */
   overflow: hidden;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
   background-color: white;
   transition: box-shadow 0.3s ease;
 }
@@ -918,7 +943,7 @@ img.main-img {
   font-weight: 550;
   /* font-size: 1rem; */
   line-height: 1.5;
-  font-family: "Helvetica Now Text Medium", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 .product-card__subtitle {
@@ -1138,4 +1163,8 @@ img.main-img {
 }
 .carousel-images{
     margin-left: 20px;
+}
+.css-mbx0dj{
+  display: flex;
+  justify-content: end;
 }
