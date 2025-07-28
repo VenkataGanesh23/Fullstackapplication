@@ -1,0 +1,29 @@
+/* Navbar.css */
+
+.search-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1301;
+  padding: 16px;
+  padding-bottom: 96px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%) scale(0.96);
+  opacity: 0;
+  animation: macAppSlideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Fix for sticky navbar white line and smooth scroll behavior */
+.sticky-jordan-navbar {
+  border-bottom: none !important;
+  transition: border-bottom 0.3s ease;
+}
+
+/* Optional: smooth transition for sticky navbar background */
+.sticky-jordan-navbar.scrolled {
+  background-color: #1f1f21 !important;
+  transition: background-color 0.3s ease;
+}

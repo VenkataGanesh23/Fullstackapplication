@@ -93,39 +93,6 @@ export const GET_PRODUCT_BY_ID = gql`
 `;
 
 
-export const RESTORE_PRODUCT_BY_ID=gql`
-mutation Mutation($restoreProductId: Int!) {
-  restoreProduct(id: $restoreProductId) {
-    status {
-      code
-      message
-    }
-    product {
-      id
-      name
-      description
-      price
-      category {
-        id
-        name
-        description
-        createdAt
-      }
-      subCategory
-      brand
-      sizes
-      colors
-      images
-      stock
-      isActive
-      createdAt
-      updatedAt
-      userId
-    }
-  }
-}
-`
-
 export const UPDATE_PRODUCT_ID=gql`
 query Query($categoryId: Int!) {
   getProductsByCategory(categoryId: $categoryId) {

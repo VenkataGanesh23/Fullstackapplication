@@ -1,11 +1,16 @@
 import React from 'react';
 import { Box, Typography, Link, Divider } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import "../../css/Footer.css"
 
-const Footer: React.FC = () => {
+type FooterProps = {
+  isJordanPage?: boolean;
+};
+
+const Footer: React.FC<FooterProps> = ({ isJordanPage = false }) => {
   return (
-    <Box sx={{ backgroundColor: '#f5f5f5', padding: 4 }}>
-      <Divider sx={{ mb: 4, borderColor: '#000000', opacity: 0.3 }} />
+    <Box className={`footer-container ${isJordanPage ? 'jordan-footer' : ''}`}>
+      <Divider sx={{ mb: 4, borderColor: isJordanPage ? '#ffffff33' : '#000000', opacity: 0.2 }} />
 
       <Grid container spacing={4}>
         <Grid item xs={12} md={4}>

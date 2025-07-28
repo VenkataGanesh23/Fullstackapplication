@@ -5,14 +5,13 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import GlobalStyles from "@mui/material/GlobalStyles";
-import logo from "../../../assets/nikelogo.webp";
+import nikelogowhite from "../../../assets/nikelogowhite.png";
+import nikelogoblack from "../../../assets/nikelogoblack.png";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import SearchIcon from "@mui/icons-material/Search";
-import jordanlogo from "../../../assets/jordanlogo.webp";
-import { useAuth } from "../../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import Dropdownnav from "./Dropdownnav";
 import {
   newAndFeaturedSections,
@@ -21,6 +20,11 @@ import {
   kidsSections,
   saleSections,
 } from "../../reusable/Nav&Footer/Dropdowndatanav";
+import Scroll from "./Scroll";
+import Jordannav from "./Jordannav";
+import { InputAdornment, Badge } from "@mui/material";
+import "../../css/Navbar.css"
+import { useCart } from "../../../context/CartContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -72,20 +76,33 @@ const texts = [
   {
     title: "Move, Shop, Customise & Celebrate With Us",
     subtitle:
-      "No matter what you feel like doing today, it’s better as a Member.",
+      "No matter what you feel like doing today, it's better as a Member.",
     link: "",
   },
 ];
 
-export default function Navbar() {
+type NavbarProps = {
+  darkMode?: boolean;
+};
+
+export default function Navbar({ darkMode }: NavbarProps) {
   const [index, setIndex] = useState(0);
   const [showSearchOverlay, setShowSearchOverlay] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const location = useLocation();
+  const overlayInputRef = useRef<HTMLInputElement | null>(null);
+  const hiddenScrollPaths = ["/favorites", "/cart"];
+  const shouldHideScroll = hiddenScrollPaths.includes(
+    location.pathname.toLowerCase()
+  );
+  const isJordanPage = location.pathname.includes("/Jordan");
 
-  const { logout } = useAuth();
   const navigate = useNavigate();
+
+  const { cartItems } = useCart();
+const totalCartCount = cartItems.reduce((sum:any, item:any) => sum + item.quantity, 0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -94,14 +111,34 @@ export default function Navbar() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
   const handleLogoClick = () => {
     navigate("/Dashboard");
   };
+
+useEffect(() => {
+  const handleScroll = () => {
+    if (activeDropdown || showSearchOverlay) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      setShowSearchOverlay(false);
+      setActiveDropdown(null);
+    }
+  };
+
+  // Attach both listeners
+  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("keydown", handleKeyDown);
+
+  // Clean up
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener("keydown", handleKeyDown);
+  };
+}, [activeDropdown, showSearchOverlay]);
 
   return (
     <>
@@ -133,64 +170,102 @@ export default function Navbar() {
             top: 20,
             left: 0,
           },
+          ".nav-text": {
+            color: isJordanPage ? "#fff" : "#000",
+            "&:hover": {
+              color: isJordanPage ? "#ccc" : "#555",
+            },
+          },
+          ".nav-icon": {
+            color: isJordanPage ? "#fff" : "#000",
+          },
+          ".nav-search-icons": {
+            color: isJordanPage ? "#fff" : "#000",
+          },
+          ".nav-text-main": {
+            color: isJordanPage ? "#fff" : "#000",
+          },
+          ".nav-text-signout": {
+            color: isJordanPage ? "#fff" : "#000",
+          },
+          ".vertical-line": {
+            backgroundColor: isJordanPage ? "#fff" : "#000",
+          },
+          ".dropdown-nav": {
+            pointerEvents: "none", // Disable pointer events when hidden
+          },
+          ".dropdown-nav.visible": {
+            pointerEvents: "auto", // Enable pointer events when visible
+          },
         }}
       />
 
       <Box sx={{ flexGrow: 1 }}>
-        {/* Top Bar */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            px: 4,
-            py: 0.5,
-            backgroundColor: "white",
-          }}
-        >
-          <img
-            src={jordanlogo}
-            alt="Jordan Logo"
-            className="jordan-logo-nav"
-            onClick={() => navigate("/Jordan")}
-          />
-          <Box sx={{ display: "flex", alignItems: "center", mr: 1 }}>
-            <p className="nav-text-main">Find a Store</p>
-            <div className="vertical-line"></div>
-            <p className="nav-text-main">Help</p>
-            <div className="vertical-line"></div>
-            <p className="nav-text-main">Join Us</p>
-            <div className="vertical-line"></div>
-            <p className="nav-text-signout" onClick={handleLogout}>
-              Sign Out
-            </p>
-          </Box>
-        </Box>
-
-        {/* App Bar */}
-        {!showSearchOverlay && (
-          <AppBar
-            position="static"
+        {/* Dim Background Overlay */}
+        {(activeDropdown || showSearchOverlay) && (
+          <Box
             sx={{
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-              backgroundColor: "#fff",
+              position: "fixed",
+              top: 40,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              backgroundColor: "rgba(0, 0, 0, 0.4)", // semi-transparent black
+              zIndex: 1000,
+              transition: "opacity 0.3s ease-in-out",
+              pointerEvents: "none", // So it doesn’t block interaction
+            }}
+          />
+        )}
+
+        {<Jordannav />}
+        {/* App Bar */}
+        {showSearchOverlay ? (
+          // Preserve height of AppBar when hidden
+          <Box sx={{ height: "64px" }} />
+        ) : (
+          <AppBar
+            position="sticky"
+            elevation={0}
+            sx={{
+              top: 0,
+              zIndex: 1400,
+              backgroundColor: isJordanPage ? "#1f1f21" : "#fff",
+              color: isJordanPage ? "#fff" : "#000",
             }}
           >
-            <Toolbar>
+            <Toolbar
+              sx={{
+                backgroundColor: isJordanPage ? "#1f1f21" : "#fff",
+              }}
+            >
               <Typography
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+                sx={{
+                  flexGrow: 1,
+                  display: { xs: "none", sm: "block" },
+                  backgroundColor: isJordanPage ? "#1f1f21" : "#fff", // <<< Also add here
+                }}
               >
                 <img
-                  src={logo}
-                  alt="Logo"
+                  src={isJordanPage ? nikelogowhite : nikelogoblack}
+                  alt="Nike Logo"
                   className="nike-logo-nav"
                   onClick={handleLogoClick}
+                  style={{
+                    backgroundColor: isJordanPage ? "#1f1f21" : "#fff",
+                    height: "40px",
+                    cursor: "pointer",
+                  }}
                 />
               </Typography>
-              <div className="nav-name" >
+
+              <div
+                className="nav-name"
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
                 <Typography
                   className="nav-text"
                   onMouseEnter={() => setActiveDropdown("new")}
@@ -221,11 +296,51 @@ export default function Navbar() {
                 >
                   Sale
                 </Typography>
-                <Typography className="nav-text"
-                  onMouseLeave={() => setActiveDropdown(null)}>SNKRS</Typography>
+                <Typography
+                  className="nav-text"
+                  onMouseEnter={() => setActiveDropdown(null)}
+                >
+                  SNKRS
+                </Typography>
+
+                {/* 🔻 Now render the correct dropdown based on state */}
+                <Dropdownnav
+                  visible={activeDropdown === "new"}
+                  sections={newAndFeaturedSections}
+                  darkMode={isJordanPage}
+                />
+                <Dropdownnav
+                  visible={activeDropdown === "men"}
+                  sections={MenSection}
+                  darkMode={isJordanPage}
+                />
+                <Dropdownnav
+                  visible={activeDropdown === "women"}
+                  sections={womenSections}
+                  darkMode={isJordanPage}
+                />
+                <Dropdownnav
+                  visible={activeDropdown === "kids"}
+                  sections={kidsSections}
+                  darkMode={isJordanPage}
+                />
+                <Dropdownnav
+                  visible={activeDropdown === "sale"}
+                  sections={saleSections}
+                  darkMode={isJordanPage}
+                />
               </div>
-              <Search className="nav-search-icon">
-                <SearchIconWrapper className="nav-search-icon">
+
+              <Search
+                className="nav-search-icon"
+                sx={{
+                  backgroundColor: isJordanPage ? "black" : alpha("#000", 0.05),
+                  "&:hover": {
+                    backgroundColor: isJordanPage ? "grey" : alpha("#000", 0.1),
+                  },
+                }}
+              >
+                <SearchIconWrapper>
                   <SearchIcon className="nav-search-icons" />
                 </SearchIconWrapper>
                 <StyledInputBase
@@ -234,52 +349,106 @@ export default function Navbar() {
                   value={searchText}
                   onFocus={() => setShowSearchOverlay(true)}
                   onChange={(e) => setSearchText(e.target.value)}
+                  sx={{
+                    input: {
+                      color: isJordanPage ? "#fff" : "#000",
+                    },
+                  }}
                 />
               </Search>
-              <FavoriteBorderRoundedIcon className="nav-icon" />
-              <WorkOutlineIcon className="nav-icon" />
+
+              <FavoriteBorderRoundedIcon className="nav-icon" sx={{ ml: 2 }} onClick={()=>navigate("/Favorites")} />
+              <Box
+  component="a"
+  href="/Cart"
+  sx={{
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    color: isJordanPage ? "#fff" : "#000",
+    ml: 2,
+    textDecoration: "none",
+  }}
+  aria-label={`Bag Items: ${totalCartCount}`}
+  title={`Bag Items: ${totalCartCount}`}
+>
+  <WorkOutlineIcon fontSize="medium" className="nav-icon" />
+
+  {totalCartCount > 0 && (
+    <Typography
+      sx={{
+        position: "absolute",
+        top: "6px",
+        right: "4px",
+        color: "black",
+        borderRadius: "50%",
+        width: 16,
+        height: 16,
+        fontSize: "11px",
+        fontWeight: "bold",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {totalCartCount}
+    </Typography>
+  )}
+</Box>
+
+
+
             </Toolbar>
           </AppBar>
         )}
+
+        {/* Dropdowns */}
         <Dropdownnav
           visible={activeDropdown === "new"}
           onMouseLeave={() => setActiveDropdown(null)}
           sections={newAndFeaturedSections}
+          darkMode={isJordanPage}
         />
         <Dropdownnav
           visible={activeDropdown === "men"}
           onMouseLeave={() => setActiveDropdown(null)}
           sections={MenSection}
+          darkMode={isJordanPage}
         />
         <Dropdownnav
           visible={activeDropdown === "women"}
           onMouseLeave={() => setActiveDropdown(null)}
           sections={womenSections}
+          darkMode={isJordanPage}
         />
         <Dropdownnav
           visible={activeDropdown === "kids"}
           onMouseLeave={() => setActiveDropdown(null)}
           sections={kidsSections}
+          darkMode={isJordanPage}
         />
         <Dropdownnav
           visible={activeDropdown === "sale"}
           onMouseLeave={() => setActiveDropdown(null)}
           sections={saleSections}
+          darkMode={isJordanPage}
         />
 
         {/* Search Overlay */}
         {showSearchOverlay && (
           <Box
+          className="search-overlay"
             sx={{
               position: "absolute",
               left: 0,
               right: 0,
-              height: "50vh",
-              bgcolor: "rgba(255, 255, 255)",
+              height: "auto",
+              bgcolor: isJordanPage ? "#1f1f21" : "#fff",
+              color: isJordanPage ? "#fff" : "#000",
               top: "0px",
               zIndex: 1301,
-              px: 4,
-              py: 3,
+              px: 2,
+              pb: 12,
               overflowY: "auto",
               display: "flex",
               flexDirection: "column",
@@ -295,24 +464,37 @@ export default function Navbar() {
               }}
             >
               <img
-                src={logo}
+                src={nikelogoblack}
                 alt="Nike"
                 className="nav-expand-logo"
-                style={{ height: 24, cursor: "pointer" }}
+                style={{
+                  height: 24,
+                  cursor: "pointer",
+                  filter: isJordanPage ? "invert(1)" : "none",
+                }}
               />
               <InputBase
                 placeholder="Search"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
+                inputRef={overlayInputRef} 
+                startAdornment={
+                  <InputAdornment position="start">
+                    <SearchIcon
+                      sx={{ color: isJordanPage ? "#fff" : "#000" }}
+                    />
+                  </InputAdornment>
+                }
                 sx={{
                   border: "1px solid #ccc",
                   borderRadius: "30px",
                   px: 3,
-                  py: 1,
+                  py: 0.5,
                   flexGrow: 0.7,
                   display: "flex",
                   justifyContent: "space-between",
-                  bgcolor: "#eee",
+                  bgcolor: isJordanPage ? "#333" : "#eee",
+                  color: isJordanPage ? "#fff" : "#000",
                 }}
               />
               <Typography
@@ -325,7 +507,9 @@ export default function Navbar() {
                   py: 1,
                   borderRadius: "8px",
                   whiteSpace: "nowrap",
-                  "&:hover": { bgcolor: "white", opacity: "0.5" },
+                  "&:hover": {
+                    opacity: "0.6",
+                  },
                 }}
               >
                 Cancel
@@ -339,8 +523,7 @@ export default function Navbar() {
                 mb: 2,
                 ml: 11,
                 textAlign: "center",
-                color: "grey",
-                fontWeight: "bold",
+                color: isJordanPage ? "#ccc" : "grey",
                 marginRight: "800px",
               }}
             >
@@ -352,7 +535,7 @@ export default function Navbar() {
                 display: "grid",
                 gridTemplateColumns: "repeat(7, auto)",
                 justifyContent: "center",
-                gap: 1,
+                gap: 2,
                 mb: 3,
               }}
             >
@@ -371,16 +554,16 @@ export default function Navbar() {
                 <Box
                   key={term}
                   sx={{
-                    bgcolor: "#f5f5f5",
+                    bgcolor: isJordanPage ? "#333" : "#f5f5f5",
                     fontWeight: "bold",
-                    px: 2,
-                    py: 1,
+                    px: 2.2,
+                    py: 1.3,
                     borderRadius: "30px",
                     fontSize: "14px",
                     cursor: "pointer",
                     textAlign: "center",
                     "&:hover": {
-                      backgroundColor: "#eee",
+                      backgroundColor: isJordanPage ? "#444" : "#eee",
                     },
                   }}
                   onClick={() => {
@@ -397,7 +580,10 @@ export default function Navbar() {
             {/* Recent Searches */}
             {recentSearches.length > 0 && (
               <>
-                <Typography variant="subtitle1" sx={{ mb: 1 }}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{ mb: 1, ml: 38, color: isJordanPage ? "#ccc" : "grey" }}
+                >
                   Recent Searches
                 </Typography>
                 {recentSearches.map((search, index) => (
@@ -405,14 +591,16 @@ export default function Navbar() {
                     key={index}
                     sx={{
                       display: "flex",
+                      ml: 38,
+                      mb: 1,
                       justifyContent: "space-between",
                       alignItems: "center",
                       py: 0.5,
                     }}
                   >
-                    <Typography>{search}</Typography>
+                    <Typography sx={{ fontSize: 21 }}>{search}</Typography>
                     <Typography
-                      sx={{ cursor: "pointer" }}
+                      sx={{ cursor: "pointer", marginRight: "240px" }}
                       onClick={() =>
                         setRecentSearches((prev) =>
                           prev.filter((_, i) => i !== index)
@@ -429,49 +617,9 @@ export default function Navbar() {
         )}
 
         {/* Bottom Banner */}
-        <Box
-          sx={{
-            position: "relative",
-            padding: "10px",
-            height: 70,
-            overflow: "hidden",
-            backgroundColor: "#f5f5f5",
-          }}
-        >
-          {texts.map((text, i) => (
-            <Box
-              key={i}
-              className={index === i ? "slide-text" : ""}
-              sx={{
-                opacity: index === i ? 1 : 0,
-              }}
-            >
-              <Typography variant="h5" sx={{ fontSize: 16 }}>
-                {text.title}
-              </Typography>
-              {text.subtitle && (
-                <Typography variant="subtitle1" sx={{ fontSize: 14 }}>
-                  {text.subtitle}
-                </Typography>
-              )}
-              {text.link && (
-                <Typography
-                  onClick={() => navigate(text.link)}
-                  sx={{
-                    cursor: "pointer",
-                    fontSize: 12,
-                    color: "black",
-                    textDecoration: "underline",
-                    mt: 1,
-                    fontWeight: "bold",
-                  }}
-                >
-                  Shop All Our New Markdowns
-                </Typography>
-              )}
-            </Box>
-          ))}
-        </Box>
+        {!shouldHideScroll && (
+          <Scroll texts={texts} index={index} isJordanPage={isJordanPage} />
+        )}
       </Box>
     </>
   );

@@ -6,11 +6,18 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_CONTENT } from "../graphql/Query";
 import Carousel from "../reusable/Carousel/Carousel";
 import ShopBySport from "../reusable/Carousel/Carouselsports";
+import { GET_ALL_PRODUCTS } from "../graphql/Query";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { data } = useQuery(GET_ALL_CONTENT);
   const contents = data?.getAllContents || [];
+  const { data: allProductData } = useQuery(GET_ALL_PRODUCTS);
+  const allProducts = allProductData?.getAllProducts?.products || [];
+
+  const category1Products = allProducts.filter(
+    (product: any) => product.category?.id === 1
+  );
 
   const heroContent = contents.find((c: any) => c.id === 4);
   const featuredContent = contents.find((c: any) => c.id === 1);
@@ -25,8 +32,13 @@ const Dashboard = () => {
       image: img,
       subtitle: Carousel1?.descriptions?.[i] || "",
     })) || [];
-  console.log("Carousel1", Carousel1);
-  console.log("ShopByIcons", ShopByIcons);
+
+  const carouselItems = category1Products.map((product: any) => ({
+    image: product.images?.[0] || "", // show 1st image
+    subtitle: product.name,
+    subtitle2: product?.subCategory,
+    subtitle3: product.price,
+  }));
 
   const handleShoes = () => navigate("/Shoes");
 
@@ -115,7 +127,13 @@ const Dashboard = () => {
           >
             <Typography
               variant="subtitle2"
-              sx={{ fontWeight: 600, mb: 1, color: "white", fontSize: 16 }}
+              sx={{
+                fontWeight: 600,
+                mb: 1,
+                color: "white",
+                fontSize: 16,
+                fontFamily: "Open Sans, sans-serif",
+              }}
             >
               {latestContent.title}
             </Typography>
@@ -128,6 +146,7 @@ const Dashboard = () => {
                 mb: 2,
                 color: "white",
                 whiteSpace: "wrap",
+                fontFamily: "Open Sans, sans-serif",
               }}
             >
               {latestContent.descriptions}
@@ -141,6 +160,7 @@ const Dashboard = () => {
                 borderRadius: 8,
                 px: 3,
                 textTransform: "none",
+                fontFamily: "Open Sans, sans-serif",
                 fontWeight: 600,
               }}
             >
@@ -170,14 +190,26 @@ const Dashboard = () => {
           >
             <Typography
               variant="subtitle2"
-              sx={{ fontWeight: 600, mb: 1, color: "white", fontSize: 16 }}
+              sx={{
+                fontWeight: 600,
+                mb: 1,
+                color: "white",
+                fontSize: 16,
+                fontFamily: "Open Sans, sans-serif",
+              }}
             >
               {latestContent2.title}
             </Typography>
 
             <Typography
               variant="body1"
-              sx={{ fontSize: 20, fontWeight: 500, mb: 2, color: "white" }}
+              sx={{
+                fontSize: 20,
+                fontWeight: 500,
+                mb: 2,
+                color: "white",
+                fontFamily: "Open Sans, sans-serif",
+              }}
             >
               {latestContent2.descriptions}
             </Typography>
@@ -190,6 +222,7 @@ const Dashboard = () => {
                 borderRadius: 8,
                 px: 3,
                 textTransform: "none",
+                fontFamily: "Open Sans, sans-serif",
                 fontWeight: 600,
               }}
             >
@@ -200,7 +233,15 @@ const Dashboard = () => {
       </Box>
 
       {/* 🔷 Featured Section (ID 2) */}
-      <Typography sx={{ fontWeight: "bold", fontSize: 22, mt: 5, px: 7 }}>
+      <Typography
+        sx={{
+          fontWeight: "bold",
+          fontSize: 22,
+          mt: 5,
+          px: 7,
+          fontFamily: "'Open Sans', sans-serif",
+        }}
+      >
         {featuredContent?.title || "Featured"}
       </Typography>
 
@@ -239,10 +280,11 @@ const Dashboard = () => {
             <Typography
               sx={{
                 fontSize: 18,
-                fontWeight: "bold",
+                fontWeight: "600",
                 mt: 5,
                 mb: 5,
                 color: "black",
+                fontFamily: "'Open Sans', sans-serif",
               }}
             >
               {featuredContent?.descriptions?.[i] || ""}
@@ -360,6 +402,16 @@ const Dashboard = () => {
           items={ShopByIcons}
           itemWidth={455}
           itemHeight={450}
+          paddingBottom={10}
+        />
+      </Box>
+      <Box sx={{ mt: 5 }}>
+        <Carousel
+          title="Trending Now"
+          items={carouselItems}
+          itemWidth={455}
+          itemHeight={460}
+          paddingBottom={17}
         />
       </Box>
       <ShopBySport
